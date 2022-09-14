@@ -27,11 +27,14 @@ This function requires two input datasets, **food_logging_dataset** and **partic
 
 ## 3) What exactly are the inputs to the above function?
 
-There are two datasets we need to pass into **treets.summarize_data_with_experiment_phases()**: **food_logging_dataset** and **participant_reference_dataset**
+There are two datasets we need to pass into **treets.summarize_data_with_experiment_phases()** are **food_logging_dataset** and **participant_reference_dataset**
 
-Food_logging_dataset should contain information about every item that every participant ate throughout their studies.
-  * The columns required in the excel file or pandas dataframe that contains the food_logging_dataset: 
-Participant_reference_dataset is a dataframe that describes each participant that was in the study. It should include information such as their trial start and end dates, unique participant id, and their study phase.
+**Food_logging_dataset** should contain information about every item that every participant ate throughout their studies. In our lab's studies we have each participant's food data in a seperate csv file, so we have combine all the csvs into one dataframe using the **treets.file_loader()** function. **treets.file_loader()** takes in any number of csv files and returns a dataframe that combines all the csvs.
+  * The columns required in the **food_logging_dataset**: 'PID', 'original_logtime', 'food_type'
+
+
+**Participant_reference_dataset** is a dataframe that describes each participant that was in the study. In our lab's studies, all the participant information can be found in one excel file so we can just read it in with **pd.read_excel(file_location)**
+ * The columns required in the **Participant_reference_dataset**: 'mCC_ID', 'Participant_Study_ID', 'Study Phase', 'Intervention group (TRE or HABIT)', 'Start_Day', 'End_day', 'Eating_Window_Start', 'Eating_Window_End'
 
 ## Here we open our example food logging dataset:
 
