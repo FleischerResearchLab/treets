@@ -8,8 +8,10 @@
 
 ## Example for a quick data analysis on phased studies.
 
-## *treets.summarize_data_with_experiment_phases(food_logging_dataset, participant_reference_dataset)*
+<hr style="border:2px solid gray">
+## *treets.summarize_data_with_experiment_phases(food_logging_dataset, participant_reference_dataset)* 
 *For every participant in the study, prints out the days that they did not adhere to Time Restricted Eating(TRE). Returns a pandas dataframe that summarizes each participants' adherence to TRE throughout their trial period.*
+<hr style="border:2px solid gray">
 
 For TREETS to summarize the adherence of each participant in a time restricted eating interval study, we use treets.summarize_data_with_experiment_phases(food_logging_dataset, participant_reference_dataset). Food_logging_dataset should contain information about every item that participants ate throughout their studies including the time each food was consumed. Participant_reference_dataset is a dataframe that describes each participant that was in the study. It should include information such as their trial start and end dates, unique participant id, and their study phase.
 
