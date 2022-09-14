@@ -1,24 +1,19 @@
----
-layout: none
-search: exclude
----
-
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {% for post in site.posts %}
-  {% unless post.search == "exclude" %}
   <url>
-    <loc>{{site.url}}{{post.url}}</loc>
+    <loc>https://QiwenZz.github.io/treets/00_core.html</loc>
+    <lastmod>2022-09-14T18:06:22.471Z</lastmod>
   </url>
-  {% endunless %}
-  {% endfor %}
-
-
-  {% for page in site.pages %}
-  {% unless page.search == "exclude" %}
   <url>
-    <loc>{{site.url}}{{ page.url}}</loc>
+    <loc>https://QiwenZz.github.io/treets/CONTRIBUTING.html</loc>
+    <lastmod>2022-09-14T18:06:23.188Z</lastmod>
   </url>
-  {% endunless %}
-  {% endfor %}
+  <url>
+    <loc>https://QiwenZz.github.io/treets/data/col_test_data/make_test_toy_data.html</loc>
+    <lastmod>2022-09-14T18:06:23.711Z</lastmod>
+  </url>
+  <url>
+    <loc>https://QiwenZz.github.io/treets/index.html</loc>
+    <lastmod>2022-09-14T18:06:24.132Z</lastmod>
+  </url>
 </urlset>
