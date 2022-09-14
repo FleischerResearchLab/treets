@@ -1,0 +1,37 @@
+ipynb-filters: [nbdev_filter]
+
+project:
+  type: website
+  output-dir: docs
+  preview:
+    port: 3000
+    browser: false
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-depth: 4
+
+website:
+  title: "treets"
+  site-url: "https://QiwenZz.github.io/treets/"
+  description: "This library provides functions to analyzes food logging data."
+  twitter-card: true
+  open-graph: true
+  repo-branch: master
+  repo-url: "https://github.com/QiwenZz/treets/tree/master/"
+  repo-actions: [issue]
+  navbar:
+    background: primary
+    search: true
+    right:
+      - icon: github
+        href: "https://github.com/QiwenZz/treets/tree/master/"
+  sidebar:
+    style: "floating"
+
+metadata-files: 
+  - sidebar.yml
+  - custom.yml
