@@ -16,7 +16,6 @@ jobs:
     - name: Read all notebooks
       run: |
         nbdev_read_nbs
-	nbdev_install_git_hooks
     - name: Check if all notebooks are cleaned
       run: |
         echo "Check we are starting with clean git checkout"
