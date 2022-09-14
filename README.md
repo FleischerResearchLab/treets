@@ -6,21 +6,32 @@
 
 `pip install treets`
 
-## Example for a quick data analysis on phased studies.
+## Quickstart guide on phased studies.
 
-<hr style="border:2px solid gray">
-
-## *treets.summarize_data_with_experiment_phases(food_logging_dataset, participant_reference_dataset)* 
-*For every participant in the study, prints out the days that they did not adhere to Time Restricted Eating(TRE). Returns a pandas dataframe that summarizes each participants' adherence to TRE throughout their trial period.*
-
-<hr style="border:2px solid gray">
-
-For TREETS to summarize the adherence of each participant in a time restricted eating interval study, we use treets.summarize_data_with_experiment_phases(food_logging_dataset, participant_reference_dataset). Food_logging_dataset should contain information about every item that participants ate throughout their studies including the time each food was consumed. Participant_reference_dataset is a dataframe that describes each participant that was in the study. It should include information such as their trial start and end dates, unique participant id, and their study phase.
-
+## 1) Import the necessary libraries for this TREETS software
 ```python
 import treets.core as treets
 import pandas as pd
 ```
+
+## 2) All of our processing can be done using this function ⬇️
+
+#### *treets.summarize_data_with_experiment_phases(food_logging_dataset, participant_reference_dataset)*
+<hr style="border:2px solid gray">
+
+This function requires two input datasets, **food_logging_dataset** and **participant_reference_dataset** in a very specific format that we will explain in the next step.
+
+### What the function does? 🤔
+
+*For every participant in the study, prints out the days that they did not adhere to Time Restricted Eating(TRE). Returns a pandas dataframe that summarizes each participants' adherence to TRE throughout their trial period.*
+
+## 3) What exactly are the inputs to the above function?
+
+There are two datasets we need to pass into **treets.summarize_data_with_experiment_phases()**: **food_logging_dataset** and **participant_reference_dataset**
+
+Food_logging_dataset should contain information about every item that every participant ate throughout their studies.
+  * The columns required in the excel file or pandas dataframe that contains the food_logging_dataset: 
+Participant_reference_dataset is a dataframe that describes each participant that was in the study. It should include information such as their trial start and end dates, unique participant id, and their study phase.
 
 ## Here we open our example food logging dataset:
 
@@ -354,7 +365,7 @@ df.iloc[0]
 
 
 
-## Example for a quick data analysis on non-phased studies.
+## Quickstart guide on non-phased studies.
 
 take a look at the original dataset
 
@@ -410,7 +421,7 @@ df.head(2)
 
 
 
-preprocess the data to create features we might need in the furthur analysis such as float time, week count since the first week, etc.
+preprocess the data to create features we might need in the further analysis such as float time, week count since the first week, etc.
 
 ```python
 df = treets.load_public_data(df,'unique_code', 'original_logtime',4)
