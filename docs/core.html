@@ -53,7 +53,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="file_loader" class="doc_header"><code>file_loader</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L41" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>file_loader</code>(<strong><code>data_source</code></strong>)</p>
+<h4 id="file_loader" class="doc_header"><code>file_loader</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L41" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>file_loader</code>(<strong><code>data_source</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -83,6 +83,1320 @@ nb_path: "00_core.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/parser_keys.csv&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gram_key</th>
+      <th>brand name</th>
+      <th>description</th>
+      <th>corrected spelling</th>
+      <th>food_type</th>
+      <th>gram_type</th>
+      <th>tag1</th>
+      <th>tag2</th>
+      <th>tag3</th>
+      <th>tag4</th>
+      <th>tag5</th>
+      <th>tag6</th>
+      <th>tag7</th>
+      <th>equivalent</th>
+      <th>reference</th>
+      <th>comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>vodka</td>
+      <td>NaN</td>
+      <td>vodka</td>
+      <td>NaN</td>
+      <td>b</td>
+      <td>1</td>
+      <td>alcohol</td>
+      <td>liquor</td>
+      <td>straight</td>
+      <td>fermented</td>
+      <td>NaN</td>
+      <td>complete</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>monster</td>
+      <td>monster</td>
+      <td>energy drink</td>
+      <td>NaN</td>
+      <td>b</td>
+      <td>1</td>
+      <td>energy drink</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>caffeine, added sugar</td>
+      <td>NaN</td>
+      <td>complete</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>coke</td>
+      <td>coke</td>
+      <td>soda</td>
+      <td>NaN</td>
+      <td>b</td>
+      <td>1</td>
+      <td>soda</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>caffeine, added sugar</td>
+      <td>NaN</td>
+      <td>complete</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>mocha</td>
+      <td>NaN</td>
+      <td>mocha</td>
+      <td>NaN</td>
+      <td>b</td>
+      <td>1</td>
+      <td>coffee, dairy</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>caffeine, additive, added sugar</td>
+      <td>NaN</td>
+      <td>complete</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>milk</td>
+      <td>NaN</td>
+      <td>milk</td>
+      <td>NaN</td>
+      <td>b</td>
+      <td>1</td>
+      <td>dairy</td>
+      <td>milk</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>complete</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>5247</th>
+      <td>mud</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>stopword</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5248</th>
+      <td>eh</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>stopword</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5249</th>
+      <td>ionized alkaline</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>n</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5250</th>
+      <td>eight</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>stopword</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5251</th>
+      <td>fill</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>stopword</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5252 rows × 16 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file_loader</span><span class="p">(</span><span class="s1">&#39;data/correction_dic.pickle&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;kevita&#39;: &#39;kevita&#39;,
+ &#39;kambucha&#39;: &#39;kombucha &#39;,
+ &#39;emergen&#39;: &#39;emergen-c&#39;,
+ &#39;ginerale&#39;: &#39;ginger ale&#39;,
+ &#39;coffeeee&#39;: &#39;coffee&#39;,
+ &#39;gingerale&#39;: &#39;ginger ale&#39;,
+ &#39;bcaa&#39;: &#39;bcaa&#39;,
+ &#39;coffe&#39;: &#39;coffee&#39;,
+ &#39;prework&#39;: &#39;preworkout &#39;,
+ &#39;chocloate&#39;: &#39;chocolate&#39;,
+ &#39;organifi&#39;: &#39;organic&#39;,
+ &#39;coffeee&#39;: &#39;coffee&#39;,
+ &#39;promeganate&#39;: &#39;pomegranate&#39;,
+ &#39;virgils&#39;: &#39;virgils&#39;,
+ &#39;recoverite&#39;: &#39;recoverite&#39;,
+ &#39;protien&#39;: &#39;protein&#39;,
+ &#39;wsprite&#39;: &#39;sprite&#39;,
+ &#39;trulys&#39;: &#39;truly&#39;,
+ &#39;seltzers&#39;: &#39;seltzer&#39;,
+ &#39;tumeric&#39;: &#39;turmeric &#39;,
+ &#39;michaelob&#39;: &#39;michaelob beer&#39;,
+ &#39;bday&#39;: &#39;birthday &#39;,
+ &#39;smoothy&#39;: &#39;smoothie&#39;,
+ &#39;tbls&#39;: &#39;tbs&#39;,
+ &#39;accelerade&#39;: &#39;accelerade&#39;,
+ &#39;rebbl&#39;: &#39;rebbl&#39;,
+ &#39;dalgona&#39;: &#39;dalgona&#39;,
+ &#39;cocnut&#39;: &#39;coconut&#39;,
+ &#39;xshot&#39;: &#39;shot&#39;,
+ &#39;emergenc&#39;: &#39;emergen c&#39;,
+ &#39;reishi&#39;: &#39;relish&#39;,
+ &#39;maragarita&#39;: &#39;margarita&#39;,
+ &#39;juneshine&#39;: &#39;juneshine&#39;,
+ &#39;jarritos&#39;: &#39;jarritos &#39;,
+ &#39;orgain&#39;: &#39;orgrain&#39;,
+ &#39;leminade&#39;: &#39;lemonade&#39;,
+ &#39;ligjt&#39;: &#39;light&#39;,
+ &#39;owyn&#39;: &#39;own&#39;,
+ &#39;budlight&#39;: &#39;bud light &#39;,
+ &#39;spelligrino&#39;: &#39;pellegrino&#39;,
+ &#39;sygar&#39;: &#39;sugar&#39;,
+ &#39;watermelo&#39;: &#39;watermelon&#39;,
+ &#39;manmosa&#39;: &#39;manmosa&#39;,
+ &#39;kampucha&#39;: &#39;kombucha &#39;,
+ &#39;nocco&#39;: &#39;nocco&#39;,
+ &#39;roiboos&#39;: &#39;roiboos&#39;,
+ &#39;crox&#39;: &#39;croix&#39;,
+ &#39;memosa&#39;: &#39;mimosa&#39;,
+ &#39;albario&#39;: &#39;al bario&#39;,
+ &#39;teq&#39;: &#39;tequila&#39;,
+ &#39;bcaas&#39;: &#39;bcaas&#39;,
+ &#39;limonada&#39;: &#39;lemonade&#39;,
+ &#39;carajillo&#39;: &#39;carajillo&#39;,
+ &#39;beerx&#39;: &#39;beer&#39;,
+ &#39;supet&#39;: &#39;super&#39;,
+ &#39;helada&#39;: &#39;helado&#39;,
+ &#39;umka&#39;: &#39;umcka&#39;,
+ &#39;zarbees&#39;: &#34;zarbee&#39;s&#34;,
+ &#39;unswtnd&#39;: &#39;unsweetened&#39;,
+ &#39;zaaaaa&#39;: &#39;pizza&#39;,
+ &#39;elixer&#39;: &#39;elixir&#39;,
+ &#39;lrot&#39;: &#39;iron&#39;,
+ &#39;frapp&#39;: &#39;frappuccino&#39;,
+ &#39;atkinsons&#39;: &#34;atkinson&#39;s&#34;,
+ &#39;litttle&#39;: &#39;little&#39;,
+ &#39;ampm&#39;: &#39;ampm &#39;,
+ &#39;leyche&#39;: &#39;lychee&#39;,
+ &#39;oclock&#39;: &#34;o&#39;clock&#34;,
+ &#39;volka&#39;: &#39;vodka&#39;,
+ &#39;knog&#39;: &#39;nog&#39;,
+ &#39;butterbeer&#39;: &#39;butterbeer&#39;,
+ &#39;minmosa&#39;: &#39;mimosa&#39;,
+ &#39;fry‚Äôs&#39;: &#39;fries&#39;,
+ &#39;nuero&#39;: &#39;neuro&#39;,
+ &#39;melbec&#39;: &#39;malbec&#39;,
+ &#39;philz&#39;: &#39;philz&#39;,
+ &#39;gratefruit&#39;: &#39;grapefruit&#39;,
+ &#39;zevia&#39;: &#39;zevia&#39;,
+ &#39;fitaid&#39;: &#39;fitaid&#39;,
+ &#39;rompope&#39;: &#39;rompope&#39;,
+ &#39;belvita&#39;: &#39;belvita &#39;,
+ &#39;albarin&#39;: &#39;albarin&#39;,
+ &#39;collegen&#39;: &#39;college&#39;,
+ &#39;huel&#39;: &#39;fuel&#39;,
+ &#39;rompo&#39;: &#39;rompope&#39;,
+ &#39;beeeer&#39;: &#39;beer&#39;,
+ &#39;bourban&#39;: &#39;bourbon&#39;,
+ &#39;vitarain&#39;: &#39;vitamin&#39;,
+ &#39;sandwhich&#39;: &#39;sandwich&#39;,
+ &#39;lagger&#39;: &#39;lager&#39;,
+ &#39;pelligrino&#39;: &#39;pellegrino&#39;,
+ &#39;sctoches&#39;: &#39;scotch&#39;,
+ &#39;tiquila&#39;: &#39;tequila&#39;,
+ &#39;scicilian&#39;: &#39;sicilian&#39;,
+ &#39;waterme&#39;: &#39;watermelon&#39;,
+ &#39;veggy&#39;: &#39;vegetables&#39;,
+ &#39;cofffe&#39;: &#39;coffee&#39;,
+ &#39;coconu&#39;: &#39;coconut&#39;,
+ &#39;guinnes&#39;: &#39;guinness&#39;,
+ &#39;cheyanne&#39;: &#39;cayenne&#39;,
+ &#39;gatoraid&#39;: &#39;gatorade&#39;,
+ &#39;smoothi&#39;: &#39;smoothie &#39;,
+ &#39;piont&#39;: &#39;pinot&#39;,
+ &#39;cooffee&#39;: &#39;coffee&#39;,
+ &#39;whis&#39;: &#39;whiskey&#39;,
+ &#39;slushie&#39;: &#39;slushy&#39;,
+ &#39;budlights&#39;: &#39;bud light&#39;,
+ &#39;avacado&#39;: &#39;avocado&#39;,
+ &#39;tritip&#39;: &#39;tri tip&#39;,
+ &#39;tomatoe&#39;: &#39;tomatoes&#39;,
+ &#39;vegis&#39;: &#39;veggies&#39;,
+ &#39;bitchen&#39;: &#39;bitchin&#39;,
+ &#39;guac&#39;: &#39;guacamole&#39;,
+ &#39;brocolli&#39;: &#39;broccoli&#39;,
+ &#39;reeses&#39;: &#39;reeses&#39;,
+ &#39;vege&#39;: &#39;vege&#39;,
+ &#39;tomatos&#39;: &#39;tomatoes&#39;,
+ &#39;rubios&#39;: &#39;rubios&#39;,
+ &#39;tator&#39;: &#39;tator&#39;,
+ &#39;submarina&#39;: &#39;submarina&#39;,
+ &#39;veges&#39;: &#39;veggies&#39;,
+ &#39;blueberrys&#39;: &#39;blueberries&#39;,
+ &#39;sandwiche&#39;: &#39;sandwich&#39;,
+ &#39;sandwi&#39;: &#39;sandwich&#39;,
+ &#39;bannana&#39;: &#39;banana&#39;,
+ &#39;tbspn&#39;: &#39;tbsp&#39;,
+ &#39;ascai&#39;: &#39;acai&#39;,
+ &#39;tblspn&#39;: &#39;tbsp&#39;,
+ &#39;craisins&#39;: &#39;craisins&#39;,
+ &#39;brocli&#39;: &#39;broccoli&#39;,
+ &#39;mnms&#39;: &#39;m and m s&#39;,
+ &#39;chees&#39;: &#39;cheese&#39;,
+ &#39;cantelope&#39;: &#39;canteloupe&#39;,
+ &#39;cauli&#39;: &#39;cauliflower&#39;,
+ &#39;vegies&#39;: &#39;veggies&#39;,
+ &#39;sausagw&#39;: &#39;sausage&#39;,
+ &#39;sauted&#39;: &#39;sauteed&#39;,
+ &#39;zbar&#39;: &#39;zbar&#39;,
+ &#39;fixins&#39;: &#39;fixins&#39;,
+ &#39;siracha&#39;: &#39;sriacha&#39;,
+ &#39;vegs&#39;: &#39;vegetables&#39;,
+ &#39;zuchini&#39;: &#39;zucchini &#39;,
+ &#39;vegi&#39;: &#39;vegetables &#39;,
+ &#39;hummas&#39;: &#39;hummus&#39;,
+ &#39;cinamon&#39;: &#39;cinnamon&#39;,
+ &#39;drsg&#39;: &#39;drug&#39;,
+ &#39;coliflower&#39;: &#39;cauliflower&#39;,
+ &#39;taziki&#39;: &#39;tzatziki &#39;,
+ &#39;wtuna&#39;: &#39;tuna&#39;,
+ &#39;rxbar&#39;: &#39;rx bar &#39;,
+ &#39;homeade&#39;: &#39;homemade&#39;,
+ &#39;coliflour&#39;: &#39;cauliflower&#39;,
+ &#39;handfull&#39;: &#39;handful&#39;,
+ &#39;chicke&#39;: &#39;chicken&#39;,
+ &#39;casava&#39;: &#39;cassava&#39;,
+ &#39;edemame&#39;: &#39;edamame &#39;,
+ &#39;califlower&#39;: &#39;cauliflower&#39;,
+ &#39;hashbr&#39;: &#39;hashbrowns&#39;,
+ &#39;blta&#39;: &#39;blt&#39;,
+ &#39;chiken&#39;: &#39;chicken&#39;,
+ &#39;chkn&#39;: &#39;chicken&#39;,
+ &#39;lactaid&#39;: &#39;lactaid&#39;,
+ &#39;birria&#39;: &#39;birria &#39;,
+ &#39;pbnj&#39;: &#39;pb and j &#39;,
+ &#39;alvocado&#39;: &#39;y &#39;,
+ &#39;spegetti&#39;: &#39;spaghetti&#39;,
+ &#39;avacodo&#39;: &#39;avocado&#39;,
+ &#39;yorgurt&#39;: &#39;yogurt&#39;,
+ &#39;risoni&#39;: &#39;risoni&#39;,
+ &#39;linguica&#39;: &#39;linguica&#39;,
+ &#39;jerkey&#39;: &#39;jerky &#39;,
+ &#39;smores&#39;: &#39;smores &#39;,
+ &#39;zoodles&#39;: &#39;zoodles&#39;,
+ &#39;tapatil&#39;: &#39;tapatio &#39;,
+ &#39;bananna&#39;: &#39;banana&#39;,
+ &#39;honeynut&#39;: &#39;honey nut &#39;,
+ &#39;barries&#39;: &#39;berries &#39;,
+ &#39;buritto&#39;: &#39;burrito &#39;,
+ &#39;bunless&#39;: &#39;bunless &#39;,
+ &#39;avocad&#39;: &#39;y &#39;,
+ &#39;belveda&#39;: &#39;belvita &#39;,
+ &#39;brauts&#39;: &#39;bratwurst&#39;,
+ &#39;brocoli&#39;: &#39;broccoli&#39;,
+ &#39;veggi&#39;: &#39;vegetables &#39;,
+ &#39;pattys&#39;: &#39;patties&#39;,
+ &#39;omlete&#39;: &#39;omelette &#39;,
+ &#39;helado&#39;: &#39;helado&#39;,
+ &#39;cresisant&#39;: &#39;croissant &#39;,
+ &#39;fagiole&#39;: &#39;fagiole&#39;,
+ &#39;sauc&#39;: &#39;sauce&#39;,
+ &#39;smore&#39;: &#39;smore&#39;,
+ &#39;shishito&#39;: &#39;shishito&#39;,
+ &#39;qunioa&#39;: &#39;quinoa &#39;,
+ &#39;breakfest&#39;: &#39;breakfast&#39;,
+ &#39;nutzo&#39;: &#39;nuttzo&#39;,
+ &#39;potat&#39;: &#39;y &#39;,
+ &#39;chobani&#39;: &#39;chobani &#39;,
+ &#39;pastrmi&#39;: &#39;y &#39;,
+ &#39;omlette&#39;: &#39;omelette&#39;,
+ &#39;powerbowl&#39;: &#39;powerbowl &#39;,
+ &#39;adobado&#39;: &#39;adobada &#39;,
+ &#39;bfast&#39;: &#39;breakfast &#39;,
+ &#39;bitchn&#39;: &#39;bitchn&#39;,
+ &#39;crispey&#39;: &#39;crispy &#39;,
+ &#39;strawberrys&#39;: &#39;strawberries&#39;,
+ &#39;omlet&#39;: &#39;omelette &#39;,
+ &#39;burritto&#39;: &#39;burrito&#39;,
+ &#39;prodrct&#39;: &#39;product&#39;,
+ &#39;toum&#39;: &#39;toum&#39;,
+ &#39;cocao&#39;: &#39;cocoa&#39;,
+ &#39;celerey&#39;: &#39;celery&#39;,
+ &#39;pinapple&#39;: &#39;pineapple&#39;,
+ &#39;coitja&#39;: &#39;cotija &#39;,
+ &#39;unswt&#39;: &#39;unsweetened&#39;,
+ &#39;avac&#39;: &#39;avacado&#39;,
+ &#39;fideo&#39;: &#39;fideo&#39;,
+ &#39;eggx&#39;: &#39;eggs&#39;,
+ &#39;pluot&#39;: &#39;pluot&#39;,
+ &#39;panang&#39;: &#39;panang curry &#39;,
+ &#39;okinos&#39;: &#39;okios&#39;,
+ &#39;greekstyle&#39;: &#39;greek style &#39;,
+ &#39;pankakes&#39;: &#39;y &#39;,
+ &#39;chesse&#39;: &#39;cheese&#39;,
+ &#39;quiona&#39;: &#39;quinoa &#39;,
+ &#39;sanwich&#39;: &#39;sandwich&#39;,
+ &#39;triscuits&#39;: &#39;triscuits&#39;,
+ &#39;noddles&#39;: &#39;noodles &#39;,
+ &#39;saus&#39;: &#39;sausage&#39;,
+ &#39;greenbean&#39;: &#39;green bean&#39;,
+ &#39;bressel&#39;: &#39;brussel &#39;,
+ &#39;triscuit&#39;: &#39;triscuit &#39;,
+ &#39;witb&#39;: &#39;with&#39;,
+ &#39;chaffel&#39;: &#39;chaffle&#39;,
+ &#39;sandwhiches&#39;: &#39;sandwiches&#39;,
+ &#39;rickaroon&#39;: &#39;rickaroon&#39;,
+ &#39;creame&#39;: &#39;cream&#39;,
+ &#39;yogu&#39;: &#39;yogurt&#39;,
+ &#39;mcds&#39;: &#34;mcdonald&#39;s&#34;,
+ &#39;peanu&#39;: &#39;peanut&#39;,
+ &#39;garlig&#39;: &#39;garlic&#39;,
+ &#39;raddich&#39;: &#39;raddish &#39;,
+ &#39;taquito&#39;: &#39;taquito &#39;,
+ &#39;vegie&#39;: &#39;vegetables &#39;,
+ &#39;fatata&#39;: &#39;fatata&#39;,
+ &#39;bisquits&#39;: &#39;biscuits&#39;,
+ &#39;sandwic&#39;: &#39;sandwich&#39;,
+ &#39;chedder&#39;: &#39;cheddar&#39;,
+ &#39;cherrios&#39;: &#39;cheerios &#39;,
+ &#39;flautas&#39;: &#39;flautas &#39;,
+ &#39;spinich&#39;: &#39;spinach&#39;,
+ &#39;burrit&#39;: &#39;burrito&#39;,
+ &#39;miguels&#39;: &#39;miguel&#39;,
+ &#39;brocholli&#39;: &#39;broccoli&#39;,
+ &#39;craisens&#39;: &#39;craisins&#39;,
+ &#39;whol&#39;: &#39;whole &#39;,
+ &#39;cucumb&#39;: &#39;cucumber&#39;,
+ &#39;chck&#39;: &#39;chicken &#39;,
+ &#39;spanaki&#39;: &#39;spanikopita&#39;,
+ &#39;fassolia&#39;: &#39;fassolia &#39;,
+ &#39;sslad&#39;: &#39;salad&#39;,
+ &#39;caserole&#39;: &#39;casserole&#39;,
+ &#39;jalap&#39;: &#39;jalapeno &#39;,
+ &#39;overeasy&#39;: &#39;over easy &#39;,
+ &#39;brochli&#39;: &#39;broccoli&#39;,
+ &#39;coachs&#39;: &#39;coach&#39;,
+ &#39;kabasa&#39;: &#39;kielbasa&#39;,
+ &#39;ministroni&#39;: &#39;minestrone&#39;,
+ &#39;blackbean&#39;: &#39;black bean&#39;,
+ &#39;parmigian&#39;: &#39;parmesean &#39;,
+ &#39;footling&#39;: &#39;footling &#39;,
+ &#39;meatbal&#39;: &#39;meatball&#39;,
+ &#39;totts&#39;: &#39;totts&#39;,
+ &#39;sausag&#39;: &#39;sausage&#39;,
+ &#39;nuttzo&#39;: &#39;nuttzo&#39;,
+ &#39;sagg&#39;: &#39;saag&#39;,
+ &#39;pannini&#39;: &#39;panini &#39;,
+ &#39;lattee&#39;: &#39;latte &#39;,
+ &#39;humas&#39;: &#39;human&#39;,
+ &#39;veggiea&#39;: &#39;veggies&#39;,
+ &#39;whisps&#39;: &#39;whisps &#39;,
+ &#39;mozz&#39;: &#39;mozzerella&#39;,
+ &#39;waygu&#39;: &#39;wagyu &#39;,
+ &#39;mcmuffins&#39;: &#39;mcmuffin &#39;,
+ &#39;galbani&#39;: &#39;galbani &#39;,
+ &#39;asain&#39;: &#39;asian &#39;,
+ &#39;hodads&#39;: &#39;hodads&#39;,
+ &#39;cheeze&#39;: &#39;cheese&#39;,
+ &#39;checken&#39;: &#39;chicken &#39;,
+ &#39;sanwhich&#39;: &#39;sandwich&#39;,
+ &#39;cabage&#39;: &#39;cabbage&#39;,
+ &#39;buscuits&#39;: &#39;biscuits&#39;,
+ &#39;parmegan&#39;: &#39;parmesan&#39;,
+ &#39;riced&#39;: &#39;rice&#39;,
+ &#39;crustable&#39;: &#39;uncrustable &#39;,
+ &#39;poato&#39;: &#39;potato&#39;,
+ &#39;gnochi&#39;: &#39;gnocchi&#39;,
+ &#39;xao&#39;: &#39;?&#39;,
+ &#39;braut&#39;: &#39;bratwurst&#39;,
+ &#39;lettuc&#39;: &#39;lettuce&#39;,
+ &#39;balela&#39;: &#39;balela&#39;,
+ &#39;lettus&#39;: &#39;lettuce &#39;,
+ &#39;craisons&#39;: &#39;craisins &#39;,
+ &#39;ceasear&#39;: &#39;caesar &#39;,
+ &#39;yougart&#39;: &#39;yogurt&#39;,
+ &#39;hawaiin&#39;: &#39;hawaiian &#39;,
+ &#39;quac&#39;: &#39;guacamole&#39;,
+ &#39;briskit&#39;: &#39;brisket&#39;,
+ &#39;strawberri&#39;: &#39;strawberry&#39;,
+ &#39;hersheys&#39;: &#39;hershey&#39;,
+ &#39;tomale&#39;: &#39;tamale &#39;,
+ &#39;lemonado&#39;: &#39;lemonade&#39;,
+ &#39;tomats&#39;: &#39;tomato&#39;,
+ &#39;vegfies&#39;: &#39;vegetables&#39;,
+ &#39;portabelo&#39;: &#39;portabelo mushroom &#39;,
+ &#39;mcdouble&#39;: &#39;mcdouble &#39;,
+ &#39;hmmade&#39;: &#39;homemade &#39;,
+ &#39;kindbar&#39;: &#39;kind bar &#39;,
+ &#39;sandw&#39;: &#39;sandwich &#39;,
+ &#39;brocholi&#39;: &#39;broccoli&#39;,
+ &#39;capn&#39;: &#39;captain&#39;,
+ &#39;avacad&#39;: &#39;avocado&#39;,
+ &#39;assada&#39;: &#39;asada &#39;,
+ &#39;hummu&#39;: &#39;hummus&#39;,
+ &#39;hempseed&#39;: &#39;hempseed&#39;,
+ &#39;subw&#39;: &#39;subway &#39;,
+ &#39;swuash&#39;: &#39;squash&#39;,
+ &#39;shashimi&#39;: &#39;sashimi &#39;,
+ &#39;spourts&#39;: &#39;sports&#39;,
+ &#39;toas&#39;: &#39;tons&#39;,
+ &#39;mozerella&#39;: &#39;mozzarella&#39;,
+ &#39;broccolis&#39;: &#39;broccoli&#39;,
+ &#39;chaddar&#39;: &#39;cheddar&#39;,
+ &#39;slad&#39;: &#39;salad&#39;,
+ &#39;alamode&#39;: &#39;a la mode &#39;,
+ &#39;cornb&#39;: &#39;corn&#39;,
+ &#39;labaneh&#39;: &#39;labaneh &#39;,
+ &#39;biwl&#39;: &#39;bowl&#39;,
+ &#39;brownio&#39;: &#39;brownie&#39;,
+ &#39;frsh&#39;: &#39;fish&#39;,
+ &#39;elote&#39;: &#39;elote &#39;,
+ &#39;gardein&#39;: &#39;gardein &#39;,
+ &#39;gundrys&#39;: &#34;gundry&#39;s &#34;,
+ &#39;babybels&#39;: &#39;babybel &#39;,
+ &#39;brotz&#39;: &#39;bratwurst&#39;,
+ &#39;funyuns&#39;: &#39;funyuns &#39;,
+ &#39;amys&#39;: &#34;amy&#39;s &#34;,
+ &#39;burgunon&#39;: &#39; bourguignon&#39;,
+ &#39;crossaint&#39;: &#39;croissant &#39;,
+ &#39;chcken&#39;: &#39;chicken&#39;,
+ &#39;gronola&#39;: &#39;granola&#39;,
+ &#39;babybel&#39;: &#39;babybel &#39;,
+ &#39;sndwich&#39;: &#39;sandwich&#39;,
+ &#39;roscoes&#39;: &#34;roscoe&#39;s &#34;,
+ &#39;lemtils&#39;: &#39;lentils&#39;,
+ &#39;onenglish&#39;: &#39;english&#39;,
+ &#39;raos&#39;: &#39;raos&#39;,
+ &#39;sorrry&#39;: &#39;sorry&#39;,
+ &#39;onio&#39;: &#39;onions &#39;,
+ &#39;chicharon&#39;: &#39;chicharron &#39;,
+ &#39;macaron&#39;: &#39;macaroni&#39;,
+ &#39;masubi&#39;: &#39;masubi &#39;,
+ &#39;machacca&#39;: &#39;machacca&#39;,
+ &#39;cockt&#39;: &#39;cock&#39;,
+ &#39;blueberri&#39;: &#39;blueberry&#39;,
+ &#39;crossiant&#39;: &#39;croissant &#39;,
+ &#39;larb&#39;: &#39;larb&#39;,
+ &#39;dosidos&#39;: &#39;dosidos&#39;,
+ &#39;olivea&#39;: &#39;oliver&#39;,
+ &#39;tacod&#39;: &#39;taco&#39;,
+ &#39;meltd&#39;: &#39;melt&#39;,
+ &#39;broccli&#39;: &#39;broccoli&#39;,
+ &#39;khalua&#39;: &#39;kahlua &#39;,
+ &#39;uncrushable&#39;: &#39;uncrustable &#39;,
+ &#39;superfruit&#39;: &#39;superfruit &#39;,
+ &#39;meatba&#39;: &#39;meatball&#39;,
+ &#39;breadless&#39;: &#39;breadless&#39;,
+ &#39;tbpsn&#39;: &#39;tbsp&#39;,
+ &#39;suasage&#39;: &#39;sausage&#39;,
+ &#39;poratoes&#39;: &#39;potatoes&#39;,
+ &#39;samdwich&#39;: &#39;sandwich&#39;,
+ &#39;buttee&#39;: &#39;butter&#39;,
+ &#39;trolly&#39;: &#39;trolley&#39;,
+ &#39;maithai&#39;: &#39;mai thai &#39;,
+ &#39;salaa&#39;: &#39;salad&#39;,
+ &#39;matoe&#39;: &#34;matoe&#39;s&#34;,
+ &#39;pizz&#39;: &#39;pizza&#39;,
+ &#39;spinoni&#39;: &#39;spumoni&#39;,
+ &#39;juanitas&#39;: &#34;juanita&#39;s &#34;,
+ &#39;matoes&#39;: &#34;matoe&#39;s&#34;,
+ &#39;tomali&#39;: &#39;tamale &#39;,
+ &#39;prosciu&#39;: &#39;prozac&#39;,
+ &#39;robeks&#39;: &#34;robek&#39;s &#34;,
+ &#39;chickem&#39;: &#39;chicken&#39;,
+ &#39;sprou&#39;: &#39;sprout&#39;,
+ &#39;moraccan&#39;: &#39;moroccan&#39;,
+ &#39;somoa&#39;: &#39;samoa&#39;,
+ &#39;mingon&#39;: &#39;mignon &#39;,
+ &#39;rits&#39;: &#39;its&#39;,
+ &#39;asade&#39;: &#39;asada &#39;,
+ &#39;churiso&#39;: &#39;chorizo &#39;,
+ &#39;verd&#39;: &#39;very&#39;,
+ &#39;ceeam&#39;: &#39;cream&#39;,
+ &#39;saurkraut&#39;: &#39;sauerkraut&#39;,
+ &#39;vinigarette&#39;: &#39;vinaigrette&#39;,
+ &#39;ssusage&#39;: &#39;sausage&#39;,
+ &#39;gforganic&#39;: &#39;organic&#39;,
+ &#39;casaava&#39;: &#39;cassava&#39;,
+ &#39;butger&#39;: &#39;butter&#39;,
+ &#39;brocc&#39;: &#39;broccoli &#39;,
+ &#39;moleasses&#39;: &#39;molasses&#39;,
+ &#39;buscits&#39;: &#39;biscuits&#39;,
+ &#39;vegg&#39;: &#39;vegetables &#39;,
+ &#39;roasred&#39;: &#39;roasted&#39;,
+ &#39;covid&#39;: &#39;covid&#39;,
+ &#39;arbys&#39;: &#34;arby&#39;s &#34;,
+ &#39;aoili&#39;: &#39;aioli &#39;,
+ &#39;homade&#39;: &#39;homemade&#39;,
+ &#39;oniona&#39;: &#39;onions &#39;,
+ &#39;kahula&#39;: &#39;kahlua &#39;,
+ &#39;veggis&#39;: &#39;vegetables &#39;,
+ &#39;swarma&#39;: &#39;shawarma&#39;,
+ &#39;yasso&#39;: &#39;yasso&#39;,
+ &#39;turkado&#39;: &#39;turkado&#39;,
+ &#39;shitake&#39;: &#39;shitake &#39;,
+ &#39;cresant&#39;: &#39;croissant &#39;,
+ &#39;ricemg&#39;: &#39;rice&#39;,
+ &#39;tatter&#39;: &#39;tater &#39;,
+ &#39;parmesean&#39;: &#39;parmesan&#39;,
+ &#39;talapia&#39;: &#39;tilapia&#39;,
+ &#39;innout&#39;: &#39;in n out &#39;,
+ &#39;potates&#39;: &#39;potatoes&#39;,
+ &#39;pepp&#39;: &#39;pepper&#39;,
+ &#39;tortill&#39;: &#39;tortilla&#39;,
+ &#39;whea&#39;: &#39;when&#39;,
+ &#39;carml&#39;: &#39;caramel &#39;,
+ &#39;quinua&#39;: &#39;quinoa&#39;,
+ &#39;waffel&#39;: &#39;waffle&#39;,
+ &#39;hersherys&#39;: &#39;hershey&#39;,
+ &#39;sandwitch&#39;: &#39;sandwich&#39;,
+ &#39;vegitarian&#39;: &#39;vegetarian&#39;,
+ &#39;pumkin&#39;: &#39;pumpkin&#39;,
+ &#39;barey&#39;: &#39;barley&#39;,
+ &#39;sasauge&#39;: &#39;sausage &#39;,
+ &#39;tabuli&#39;: &#39;tabouli &#39;,
+ &#39;spagetti&#39;: &#39;spaghetti&#39;,
+ &#39;macsalad&#39;: &#39;macaroni salad&#39;,
+ &#39;grnd&#39;: &#39;grand&#39;,
+ &#39;crackere&#39;: &#39;crackers&#39;,
+ &#39;masago&#39;: &#39;masago &#39;,
+ &#39;seasame&#39;: &#39;sesame&#39;,
+ &#39;fritata&#39;: &#39;fritata&#39;,
+ &#39;latkas&#39;: &#39;latkes &#39;,
+ &#39;besns&#39;: &#39;beans&#39;,
+ &#39;rouladen&#39;: &#39;rouladen &#39;,
+ &#39;acacado&#39;: &#39;avocado&#39;,
+ &#39;yogur&#39;: &#39;yogurt&#39;,
+ &#39;coonut&#39;: &#39;coconut&#39;,
+ &#39;colliflower&#39;: &#39;cauliflower&#39;,
+ &#39;spagghetti&#39;: &#39;spaghetti&#39;,
+ &#39;juevos&#39;: &#39;huevos &#39;,
+ &#39;torilla&#39;: &#39;tortilla &#39;,
+ &#39;fosted&#39;: &#39;frosted &#39;,
+ &#39;civeche&#39;: &#39;ceviche &#39;,
+ &#39;sald&#39;: &#39;salad&#39;,
+ &#39;nonpasta&#39;: &#39;anti pasta&#39;,
+ &#39;shrim&#39;: &#39;shrimp&#39;,
+ &#39;plaintain&#39;: &#39;plantain&#39;,
+ &#39;eggroll&#39;: &#39;egg roll&#39;,
+ &#39;meetballs&#39;: &#39;meatballs&#39;,
+ &#39;parmesa&#39;: &#39;parmesan&#39;,
+ &#39;chixken&#39;: &#39;chicken&#39;,
+ &#39;guacamol&#39;: &#39;guacamole&#39;,
+ &#39;protion&#39;: &#39;portion&#39;,
+ &#39;sautted&#39;: &#39;sauteed &#39;,
+ &#39;poptart&#39;: &#39;pop tart &#39;,
+ &#39;broco&#39;: &#39;broccoli &#39;,
+ &#39;luigis&#39;: &#34;luigi&#39;s &#34;,
+ &#39;cranberr&#39;: &#39;cranberry&#39;,
+ &#39;deink&#39;: &#39;drink&#39;,
+ &#39;slasa&#39;: &#39;slash&#39;,
+ &#39;zuke&#39;: &#39;zucchini&#39;,
+ &#39;crissont&#39;: &#39;croissant &#39;,
+ &#39;civiche&#39;: &#39;ceviche &#39;,
+ &#39;californi&#39;: &#39;california&#39;,
+ &#39;pancak&#39;: &#39;pancake&#39;,
+ &#39;salmom&#39;: &#39;salmon&#39;,
+ &#39;turmuric&#39;: &#39;turmeric&#39;,
+ &#39;picata&#39;: &#39;picata&#39;,
+ &#39;burguer&#39;: &#39;burger&#39;,
+ &#39;creama&#39;: &#39;cream&#39;,
+ &#39;curriso&#39;: &#39;?&#39;,
+ &#39;baens&#39;: &#39;beans&#39;,
+ &#39;colifor&#39;: &#39;colifor&#39;,
+ &#39;colifl&#39;: &#39;colifor&#39;,
+ &#39;biscut&#39;: &#39;biscuit&#39;,
+ &#39;noodl&#39;: &#39;noodle&#39;,
+ &#39;egges&#39;: &#39;eggs&#39;,
+ &#39;flauta&#39;: &#39;flauta&#39;,
+ &#39;enchi&#39;: &#39;enchilada&#39;,
+ &#39;cristini&#39;: &#39;crostini&#39;,
+ &#39;mushr&#39;: &#39;mushrooms&#39;,
+ &#39;meato&#39;: &#39;meat&#39;,
+ &#39;crestini&#39;: &#39;crostini&#39;,
+ &#39;grillled&#39;: &#39;grilled&#39;,
+ &#39;oggies&#39;: &#34;oggi&#39;s&#34;,
+ &#39;cauliflowel&#39;: &#39;cauliflower&#39;,
+ &#39;fillipis&#39;: &#39;fillipis&#39;,
+ &#39;ciappino&#39;: &#39;ciopinno&#39;,
+ &#39;uncrustable&#39;: &#39;uncrustable &#39;,
+ &#39;meatlof&#39;: &#39;meatloaf&#39;,
+ &#39;zuch&#39;: &#39;zucchini&#39;,
+ &#39;kalamato&#39;: &#39;kalamata&#39;,
+ &#39;cherios&#39;: &#39;cheerios&#39;,
+ &#39;fratata&#39;: &#39;frittata&#39;,
+ &#39;tangelos&#39;: &#39;tangelos&#39;,
+ &#39;sessme&#39;: &#39;sesame&#39;,
+ &#39;broclli&#39;: &#39;broccoli&#39;,
+ &#39;terraki&#39;: &#39;teriyaki&#39;,
+ &#39;brussles&#39;: &#39;brussel&#39;,
+ &#39;carnita&#39;: &#39;carnitas&#39;,
+ &#39;papusas&#39;: &#39;pupusas&#39;,
+ &#39;chese&#39;: &#39;cheese&#39;,
+ &#39;quoran&#39;: &#39;quorn&#39;,
+ &#39;portos&#39;: &#34;porto&#39;s&#34;,
+ &#39;chioban&#39;: &#39;chobani&#39;,
+ &#39;kilbasa&#39;: &#39;kielbasa&#39;,
+ &#39;picatta&#39;: &#39;piccata&#39;,
+ &#39;panseared&#39;: &#39;pan-seared&#39;,
+ &#39;beggies&#39;: &#39;veggies&#39;,
+ &#39;rosatis&#39;: &#34;rosati&#39;s&#34;,
+ &#39;redvine&#39;: &#39;red vines&#39;,
+ &#39;habbit&#39;: &#39;habit&#39;,
+ &#39;mashies&#39;: &#34;mashie&#39;s&#34;,
+ &#39;almnd&#39;: &#39;almond&#39;,
+ &#39;amerivano&#39;: &#39;americano&#39;,
+ &#39;braed&#39;: &#39;bread&#39;,
+ &#39;lubia&#39;: &#39;lubia&#39;,
+ &#39;rootbear&#39;: &#39;root beer&#39;,
+ &#39;brokie&#39;: &#39;brookie&#39;,
+ &#39;gyozo&#39;: &#39;gyoza&#39;,
+ &#39;tecates&#39;: &#39;tecates&#39;,
+ &#39;oilve&#39;: &#39;olive&#39;,
+ &#39;pringl&#39;: &#39;pringles&#39;,
+ &#39;benidct&#39;: &#39;benedict&#39;,
+ &#39;icecrm&#39;: &#39;ice cream&#39;,
+ &#39;keenwa&#39;: &#39;quinoa&#39;,
+ &#39;hashbrn&#39;: &#39;hash brown&#39;,
+ &#39;pretzles&#39;: &#39;pretzels&#39;,
+ &#39;cabobs&#39;: &#39;kebabs&#39;,
+ &#39;oeos&#39;: &#39;oreos&#39;,
+ &#39;viggies&#39;: &#39;veggies&#39;,
+ &#39;spehgetti&#39;: &#39;spaghetti&#39;,
+ &#39;cheess&#39;: &#39;cheese&#39;,
+ &#39;sunchips&#39;: &#39;sunchips&#39;,
+ &#39;justins&#39;: &#34;justin&#39;s&#34;,
+ &#39;breakfas&#39;: &#39;breakfast&#39;,
+ &#39;burroto&#39;: &#39;burrito&#39;,
+ &#39;coje&#39;: &#39;cojita&#39;,
+ &#39;tahai&#39;: &#39;thai&#39;,
+ &#39;jalepen&#39;: &#39;jalapeño&#39;,
+ &#39;twcos&#39;: &#39;tacos&#39;,
+ &#39;pitatoe&#39;: &#39;potatoes&#39;,
+ &#39;asparsgus&#39;: &#39;asparagus&#39;,
+ &#39;tanderine&#39;: &#39;tangerine&#39;,
+ &#39;desset&#39;: &#39;dessert&#39;,
+ &#39;rudys&#39;: &#34;rudy&#39;s&#34;,
+ &#39;homaemade&#39;: &#39;homemade&#39;,
+ &#39;smorse&#39;: &#34;s&#39;mores&#34;,
+ &#39;srawberries&#39;: &#39;strawberries&#39;,
+ &#39;ceacker&#39;: &#39;cracker&#39;,
+ &#39;pataoe&#39;: &#39;potato&#39;,
+ &#39;chibata&#39;: &#39;ciabatta&#39;,
+ &#39;leftivers&#39;: &#39;leftovers&#39;,
+ &#39;tocitos&#39;: &#39;tostitos&#39;,
+ &#39;rggs&#39;: &#39;eggs&#39;,
+ &#39;sinfull&#39;: &#39;sinfull&#39;,
+ &#39;rotelle&#39;: &#39;rotelle&#39;,
+ &#39;cocon&#39;: &#39;coconut&#39;,
+ &#39;appke&#39;: &#39;apple&#39;,
+ &#39;rigatone&#39;: &#39;rigatoni&#39;,
+ &#39;avicado&#39;: &#39;avocado&#39;,
+ &#39;stiffinf&#39;: &#39;stuffing&#39;,
+ &#39;turjey&#39;: &#39;turkey&#39;,
+ &#39;togeth&#39;: &#39;together&#39;,
+ &#39;truvia&#39;: &#39;truvia&#39;,
+ &#39;bubs&#39;: &#39;bubs&#39;,
+ &#39;mozzarell&#39;: &#39;mozzarella&#39;,
+ &#39;brra&#39;: &#39;birria&#39;,
+ &#39;fettuc&#39;: &#39;fettuccine&#39;,
+ &#39;veggues&#39;: &#39;veggies&#39;,
+ &#39;naguri&#39;: &#39;nigiri&#39;,
+ &#39;porkchops&#39;: &#39;pork chops&#39;,
+ &#39;burriti&#39;: &#39;burrito&#39;,
+ &#39;raspado&#39;: &#39;reposado&#39;,
+ &#39;bltt&#39;: &#39;blt&#39;,
+ &#39;sinigang&#39;: &#39;sinigang&#39;,
+ &#39;kernals&#39;: &#39;kernels&#39;,
+ &#39;sandwhcih&#39;: &#39;sandwich&#39;,
+ &#39;yougort&#39;: &#39;yogurt&#39;,
+ &#39;eggsc&#39;: &#39;eggs&#39;,
+ &#39;tazhiki&#39;: &#39;tzatziki&#39;,
+ &#39;qtrs&#39;: &#39;quarters&#39;,
+ &#39;filberts&#39;: &#39;filberts&#39;,
+ &#39;choclate&#39;: &#39;chocolate&#39;,
+ &#39;crackets&#39;: &#39;crackets&#39;,
+ &#39;carpacio&#39;: &#39;carpaccio&#39;,
+ &#39;frui&#39;: &#39;fruit&#39;,
+ &#39;donurs&#39;: &#39;donuts&#39;,
+ &#39;icetea&#39;: &#39;iced tea&#39;,
+ &#39;okios&#39;: &#39;oikos&#39;,
+ &#39;pamcake&#39;: &#39;pancake&#39;,
+ &#39;denty&#39;: &#39;dentyne&#39;,
+ &#39;jimbalaya&#39;: &#39;jambalaya&#39;,
+ &#39;glased&#39;: &#39;glazed&#39;,
+ &#39;slives&#39;: &#39;slices&#39;,
+ &#39;grubhub&#39;: &#39;grubhub&#39;,
+ &#39;cockie&#39;: &#39;cookie&#39;,
+ &#39;suchi&#39;: &#39;sushi&#39;,
+ &#39;xeggs&#39;: &#39;eggs&#39;,
+ &#39;bruler&#39;: &#39;brulee&#39;,
+ &#39;brrad&#39;: &#39;bread&#39;,
+ &#39;matchaca&#39;: &#39;matcha&#39;,
+ &#39;nann&#39;: &#39;naan&#39;,
+ &#39;slushies&#39;: &#39;slushies&#39;,
+ &#39;veggir&#39;: &#39;veggie&#39;,
+ &#39;avacados&#39;: &#39;avocados&#39;,
+ &#39;huveos&#39;: &#39;huevos&#39;,
+ &#39;seaame&#39;: &#39;sesame&#39;,
+ &#39;pazooki&#39;: &#39;pizookie&#39;,
+ &#39;proscuitto&#39;: &#39;prosciutto&#39;,
+ &#39;peppercinis&#39;: &#39;pepperoncinis&#39;,
+ &#39;kruot&#39;: &#39;crust&#39;,
+ &#39;cjeese&#39;: &#39;cheese&#39;,
+ &#39;zaaa&#39;: &#39;pizza&#39;,
+ &#39;zzaaaaa&#39;: &#39;pizza&#39;,
+ &#39;caesat&#39;: &#39;caesar&#39;,
+ &#39;portugais&#39;: &#39;portuguese&#39;,
+ &#39;vodla&#39;: &#39;vodka&#39;,
+ &#39;mozarella&#39;: &#39;mozzarella&#39;,
+ &#39;cajan&#39;: &#39;cajun&#39;,
+ &#39;brotein&#39;: &#39;protein&#39;,
+ &#39;sponach&#39;: &#39;spinach&#39;,
+ &#39;tomaties&#39;: &#39;tomatoes&#39;,
+ &#39;grreens&#39;: &#39;greens&#39;,
+ &#39;ribleta&#39;: &#39;riblets&#39;,
+ &#39;letruce&#39;: &#39;lettuce&#39;,
+ &#39;schats&#39;: &#34;schat&#39;s&#34;,
+ &#39;chilor&#39;: &#39;chilorio&#39;,
+ &#39;ommmg&#39;: &#39;omg&#39;,
+ &#39;myzithra&#39;: &#39;mizithra&#39;,
+ &#39;natchos&#39;: &#39;nachos&#39;,
+ &#39;portebello&#39;: &#39;portobello&#39;,
+ &#39;wmeat&#39;: &#39;meat&#39;,
+ &#39;vinegrette&#39;: &#39;vinaigrette&#39;,
+ &#39;sausa&#39;: &#39;sauce&#39;,
+ &#39;rasberries&#39;: &#39;raspberries&#39;,
+ &#39;ajus&#39;: &#39;au jus&#39;,
+ &#39;caulifl&#39;: &#39;cauliflower&#39;,
+ &#39;cocolime&#39;: &#39;coco lime&#39;,
+ &#39;scps&#39;: &#39;scallops&#39;,
+ &#39;whire&#39;: &#39;white&#39;,
+ &#39;califirnia&#39;: &#39;california&#39;,
+ &#39;subst&#39;: &#39;substitute&#39;,
+ &#39;dennisons&#39;: &#34;dennison&#39;s&#34;,
+ &#39;rattatouille&#39;: &#39;ratatouille&#39;,
+ &#39;esparagus&#39;: &#39;asparagus&#39;,
+ &#39;cantalope&#39;: &#39;cantaloupe&#39;,
+ &#39;sammies&#39;: &#34;sammy&#39;s&#34;,
+ &#39;cupcakr&#39;: &#39;cupcake&#39;,
+ &#39;fishies&#39;: &#39;fishes&#39;,
+ &#39;potatio&#39;: &#39;potato&#39;,
+ &#39;sayteed&#39;: &#39;sauteed&#39;,
+ &#39;fixens&#39;: &#39;fixings&#39;,
+ &#39;celantro&#39;: &#39;cilantro&#39;,
+ &#39;slald&#39;: &#39;salad&#39;,
+ &#39;anaversary&#39;: &#39;anniversary&#39;,
+ &#39;ostmeal&#39;: &#39;oatmeal&#39;,
+ &#39;aspragus&#39;: &#39;asparagus&#39;,
+ &#39;xherries&#39;: &#39;cherries&#39;,
+ &#39;coffre&#39;: &#39;coffee&#39;,
+ &#39;pratoe&#39;: &#39;potato&#39;,
+ &#39;antipasta&#39;: &#39;antipasta&#39;,
+ &#39;piccota&#39;: &#39;piccata&#39;,
+ &#39;mandms&#39;: &#39;m&amp;ms&#39;,
+ &#39;caprazi&#39;: &#39;caprese&#39;,
+ &#39;cheesey&#39;: &#39;cheesy&#39;,
+ &#39;potaro&#39;: &#39;potato&#39;,
+ &#39;briscuit&#39;: &#39;brisket&#39;,
+ &#39;brotien&#39;: &#39;protein&#39;,
+ &#39;tday&#39;: &#39;today&#39;,
+ &#39;briiscuit&#39;: &#39;biscuit&#39;,
+ &#39;salsd&#39;: &#39;salad&#39;,
+ &#39;fissh&#39;: &#39;fish&#39;,
+ &#39;schwarma&#39;: &#39;shawarma&#39;,
+ &#39;panset&#39;: &#39;pancit&#39;,
+ &#39;spinache&#39;: &#39;spinach&#39;,
+ &#39;prescoto&#39;: &#39;prosciutto&#39;,
+ &#39;bollio&#39;: &#39;bollio&#39;,
+ &#39;fritta&#39;: &#39;frittata&#39;,
+ &#39;dognut&#39;: &#39;doughnut&#39;,
+ &#39;dahnsek&#39;: &#39;dhansak&#39;,
+ &#39;freddies&#39;: &#34;freddy&#39;s&#34;,
+ &#39;lettu&#39;: &#39;lettuce&#39;,
+ &#39;saurqraut&#39;: &#39;sauerkraut&#39;,
+ &#39;pazole&#39;: &#39;pozole&#39;,
+ &#39;hashbro&#39;: &#39;hash browns&#39;,
+ &#39;waatermelon&#39;: &#39;watermelon&#39;,
+ &#39;cheeseburguer&#39;: &#39;cheeseburger&#39;,
+ &#39;esamame&#39;: &#39;edamame&#39;,
+ &#39;eddys&#39;: &#34;eddy&#39;s&#34;,
+ &#39;tomotao&#39;: &#39;tomato&#39;,
+ &#39;chocken&#39;: &#39;chicken&#39;,
+ &#39;tirilla&#39;: &#39;tortilla&#39;,
+ &#39;chilie&#39;: &#39;chili&#39;,
+ &#39;hazey&#39;: &#39;hazey&#39;,
+ &#39;raddish&#39;: &#39;radish&#39;,
+ &#39;guyere&#39;: &#39;gruyere&#39;,
+ &#39;eeggs&#39;: &#39;eggs&#39;,
+ &#39;ozcheese&#39;: &#39;cheese&#39;,
+ &#39;maithais&#39;: &#39;mai tais&#39;,
+ &#39;saugage&#39;: &#39;sausage&#39;,
+ &#39;cucs&#39;: &#39;cous cous&#39;,
+ &#39;muchroon&#39;: &#39;mushroom&#39;,
+ &#39;raisans&#39;: &#39;raisins&#39;,
+ &#39;sushimi&#39;: &#39;sashimi&#39;,
+ &#39;bndct&#39;: &#39;benedict&#39;,
+ &#39;slideea&#39;: &#39;slider&#39;,
+ &#39;margarheta&#39;: &#39;margarita&#39;,
+ &#39;sandwh&#39;: &#39;sandwich&#39;,
+ &#39;augratin&#39;: &#39;au gratin&#39;,
+ &#39;caulif&#39;: &#39;cauliflower&#39;,
+ &#39;manderine&#39;: &#39;mandarin&#39;,
+ &#39;smalll&#39;: &#39;small&#39;,
+ &#39;cheeer&#39;: &#39;cheer&#39;,
+ &#39;manwich&#39;: &#39;sandwich&#39;,
+ &#39;cuprice&#39;: &#39;cup of rice&#39;,
+ &#39;posolei&#39;: &#39;pozole&#39;,
+ &#39;rubys&#39;: &#34;ruby&#39;s&#34;,
+ &#39;peppo&#39;: &#39;pepperoni&#39;,
+ &#39;spagh&#39;: &#39;spaghetti&#39;,
+ &#39;coffde&#39;: &#39;coffee&#39;,
+ &#39;peppercini&#39;: &#39;pepperoncini&#39;,
+ &#39;csshews&#39;: &#39;cashews&#39;,
+ &#39;bavon&#39;: &#39;bacon&#39;,
+ &#39;loxs&#39;: &#39;lox&#39;,
+ &#39;chils&#39;: &#39;chilis&#39;,
+ &#39;cookiez&#39;: &#39;cookies&#39;,
+ &#39;toastx&#39;: &#39;toast&#39;,
+ &#39;browniesx&#39;: &#39;brownies&#39;,
+ &#39;museuli&#39;: &#39;muesli&#39;,
+ &#39;psole&#39;: &#39;pozole&#39;,
+ &#39;glassx&#39;: &#39;glass&#39;,
+ &#39;tacosx&#39;: &#39;tacos&#39;,
+ &#39;chifila&#39;: &#39;chick-fil-a&#39;,
+ &#39;ausie&#39;: &#39;aussie&#39;,
+ &#39;gyrosx&#39;: &#39;gyros&#39;,
+ &#39;onces&#39;: &#39;ounces&#39;,
+ &#39;screwers&#39;: &#39;skewers&#39;,
+ &#39;saled&#39;: &#39;salad&#39;,
+ &#39;plenta&#39;: &#39;polenta&#39;,
+ &#39;tbone&#39;: &#39;t-bone&#39;,
+ &#39;extan&#39;: &#39;exante&#39;,
+ &#39;veggirs&#39;: &#39;veggies&#39;,
+ &#39;necterines&#39;: &#39;nectarines&#39;,
+ &#39;balsami&#39;: &#39;balsamic&#39;,
+ &#39;omelete&#39;: &#39;omelette&#39;,
+ &#39;pimpkin&#39;: &#39;pumpkin&#39;,
+ &#39;samich&#39;: &#39;sandwich&#39;,
+ &#39;ponset&#39;: &#39;pancit&#39;,
+ &#39;spch&#39;: &#39;spinach&#39;,
+ &#39;bellpep&#39;: &#39;bell pepper&#39;,
+ &#39;serloin&#39;: &#39;sirloin&#39;,
+ &#39;quinioa&#39;: &#39;quinoa&#39;,
+ &#39;sirlo&#39;: &#39;sirloin&#39;,
+ &#39;chirisso&#39;: &#39;chorizo&#39;,
+ &#39;patatoe&#39;: &#39;potatoes&#39;,
+ &#39;kaluha&#39;: &#39;kalua&#39;,
+ &#39;padthai&#39;: &#39;pad thai&#39;,
+ &#39;quaran&#39;: &#39;quorn&#39;,
+ &#39;douthwest&#39;: &#39;southwest&#39;,
+ &#39;minosa&#39;: &#39;mimosa&#39;,
+ &#39;canalope&#39;: &#39;cantaloupe&#39;,
+ &#39;cocho&#39;: &#39;cocho&#39;,
+ &#39;locomoto&#39;: &#39;loco moco&#39;,
+ &#39;shrimo&#39;: &#39;shrimp&#39;,
+ &#39;chriso&#39;: &#34;chris&#39; ono&#34;,
+ &#39;fertada&#39;: &#39;frittata&#39;,
+ &#39;czr&#39;: &#39;caesar&#39;,
+ &#39;parmasean&#39;: &#39;parmesan&#39;,
+ &#39;pickes&#39;: &#39;pickled&#39;,
+ &#39;kiesh&#39;: &#39;quiche&#39;,
+ &#39;asparagu&#39;: &#39;asparagus&#39;,
+ &#39;taquilla&#39;: &#39;tequila&#39;,
+ &#39;totada&#39;: &#39;tostada&#39;,
+ &#39;saidage&#39;: &#39;sausage&#39;,
+ &#39;slopy&#39;: &#39;sloppy&#39;,
+ &#39;avocadoa&#39;: &#39;avocado&#39;,
+ &#39;prote&#39;: &#39;protein&#39;,
+ &#39;siggis&#39;: &#34;siggi&#39;s&#34;,
+ &#39;colesla&#39;: &#39;coleslaw&#39;,
+ &#39;smoithy&#39;: &#39;smoothie&#39;,
+ &#39;salmone&#39;: &#39;salmon&#39;,
+ &#39;trisket&#39;: &#39;brisket&#39;,
+ &#39;strwberrys&#39;: &#39;strawberry&#39;,
+ &#39;sakad&#39;: &#39;salad&#39;,
+ &#39;strawber&#39;: &#39;strawberry&#39;,
+ &#39;avaco&#39;: &#39;avocado&#39;,
+ &#39;meatbalks&#39;: &#39;meatballs&#39;,
+ &#39;sammys&#39;: &#34;sammy&#39;s&#34;,
+ &#39;hatd&#39;: &#39;hard&#39;,
+ &#39;yugurt&#39;: &#39;yogurt&#39;,
+ &#39;lebni&#39;: &#39;labneh&#39;,
+ &#39;ganosha&#39;: &#39;ganoush&#39;,
+ &#39;dogd&#39;: &#39;dogs&#39;,
+ &#39;chiis&#39;: &#39;chilis&#39;,
+ &#39;gnocchis&#39;: &#39;gnocchi&#39;,
+ &#39;friea&#39;: &#39;fries&#39;,
+ &#39;skices&#39;: &#39;slices&#39;,
+ &#39;okinawin&#39;: &#39;okinawa&#39;,
+ &#39;chilelime&#39;: &#39;chile lime&#39;,
+ &#39;pwppers&#39;: &#39;peppers&#39;,
+ &#39;avoc&#39;: &#39;avocado&#39;,
+ &#39;orng&#39;: &#39;orange&#39;,
+ &#39;atmeal&#39;: &#39;oatmeal&#39;,
+ &#39;kspecial&#39;: &#39;special k&#39;,
+ &#39;chocol&#39;: &#39;chocolate&#39;,
+ &#39;creameroz&#39;: &#39;creamer&#39;,
+ &#39;potao&#39;: &#39;potato&#39;,
+ &#39;aople&#39;: &#39;apple&#39;,
+ &#39;falafal&#39;: &#39;falafel&#39;,
+ &#39;beenrice&#39;: &#39;beans rice&#39;,
+ &#39;tuneeic&#39;: &#39;turmeric&#39;,
+ &#39;crun&#39;: &#39;crunchy&#39;,
+ &#39;smoled&#39;: &#39;smoked&#39;,
+ &#39;chexmix&#39;: &#39;chex mix&#39;,
+ &#39;marniet&#39;: &#39;marinate&#39;,
+ &#39;suflet&#39;: &#39;souffle&#39;,
+ &#39;keab&#39;: &#39;kebab&#39;,
+ &#39;cordo&#39;: &#39;cordon&#39;,
+ &#39;fireline&#39;: &#39;fireline&#39;,
+ &#39;seeda&#39;: &#39;seeds&#39;,
+ &#39;tbpspn&#39;: &#39;tbsp&#39;,
+ &#39;strwb&#39;: &#39;strawberry&#39;,
+ &#39;hommus&#39;: &#39;hummus&#39;,
+ &#39;capera&#39;: &#39;capers&#39;,
+ &#39;tampanade&#39;: &#39;tapenade&#39;,
+ &#39;vegied&#39;: &#39;veggies&#39;,
+ &#39;coconuty&#39;: &#39;coconut&#39;,
+ &#39;salsbery&#39;: &#39;salisbury&#39;,
+ &#39;burgern&#39;: &#39;burger&#39;,
+ &#39;appitizer&#39;: &#39;appetizer&#39;,
+ &#39;asparg&#39;: &#39;asparagus&#39;,
+ &#39;brochol&#39;: &#39;broccoli&#39;,
+ &#39;bbqs&#39;: &#39;bbq&#39;,
+ &#39;lasanga&#39;: &#39;lasagna&#39;,
+ &#39;aplper&#39;: &#39;alper&#39;,
+ &#39;bisscut&#39;: &#39;biscuit&#39;,
+ &#39;bevita&#39;: &#39;belvita&#39;,
+ &#39;cickhen&#39;: &#39;chicken&#39;,
+ &#39;vegt&#39;: &#39;vegetable&#39;,
+ &#39;coliflr&#39;: &#39;cauliflower&#39;,
+ &#39;polluck&#39;: &#39;pollock&#39;,
+ &#39;ceaasar&#39;: &#39;caesar&#39;,
+ &#39;blackberriy&#39;: &#39;blackberry&#39;,
+ &#39;croquetas&#39;: &#39;croquette&#39;,
+ &#39;chickn&#39;: &#39;chicken&#39;,
+ &#39;porcheta&#39;: &#39;porchetta&#39;,
+ &#39;boxty&#39;: &#39;boxty&#39;,
+ &#39;avoacado&#39;: &#39;avocado&#39;,
+ &#39;choclolate&#39;: &#39;chocolate&#39;,
+ &#39;friiter&#39;: &#39;fritter&#39;,
+ &#39;sandwih&#39;: &#39;sandwich&#39;,
+ &#39;yougurt&#39;: &#39;yogurt&#39;,
+ &#39;fairlife&#39;: &#39;fairlife&#39;,
+ &#39;pnuttles&#39;: &#39;p. nuttles&#39;,
+ &#39;chickless&#39;: &#39;chickless&#39;,
+ &#39;delate&#39;: &#39;delete&#39;,
+ &#39;spaghe&#39;: &#39;spaghetti&#39;,
+ &#39;babyback&#39;: &#39;baby back&#39;,
+ &#39;brgr&#39;: &#39;burger&#39;,
+ &#39;hominey&#39;: &#39;hominy&#39;,
+ &#39;suateed&#39;: &#39;sauteed&#39;,
+ &#39;nitalian&#39;: &#39;italian&#39;,
+ &#39;pwdr&#39;: &#39;powder&#39;,
+ &#39;ygrt&#39;: &#39;yogurt&#39;,
+ &#39;npumpkin&#39;: &#39;pumpkin&#39;,
+ &#39;groubd&#39;: &#39;ground&#39;,
+ &#39;grillen&#39;: &#39;grilled&#39;,
+ &#39;chicolate&#39;: &#39;chocolate&#39;,
+ &#39;gulash&#39;: &#39;goulash&#39;,
+ &#39;omelett&#39;: &#39;omelette&#39;,
+ &#39;brger&#39;: &#39;burger&#39;,
+ &#39;cookied&#39;: &#39;cookies&#39;,
+ &#39;mcdona&#39;: &#34;mcdonald&#39;s&#34;,
+ &#39;redicio&#39;: &#39;radicchio&#39;,
+ &#39;ressses&#39;: &#34;reese&#39;s&#34;,
+ &#39;tabulia&#39;: &#39;tabouli&#39;,
+ &#39;tagalong&#39;: &#39;tagalong&#39;,
+ &#39;choriz&#39;: &#39;chorizo&#39;,
+ &#39;angoes&#39;: &#39;mangoes&#39;,
+ &#39;rasber&#39;: &#39;raspberries&#39;,
+ &#39;spro&#39;: &#39;sprouts&#39;,
+ &#39;vineg&#39;: &#39;vinegar&#39;,
+ &#39;chibatt&#39;: &#39;ciabatta&#39;,
+ &#39;crep&#39;: &#39;crepe&#39;,
+ &#39;carmels&#39;: &#39;caramel&#39;,
+ &#39;scall&#39;: &#39;scallops&#39;,
+ &#39;cheet&#39;: &#39;cheetos&#39;,
+ &#39;banoffe&#39;: &#39;banoffe&#39;,
+ &#39;zabba&#39;: &#39;abba-zaba&#39;,
+ &#39;cantalo&#39;: &#39;cantaloupe&#39;,
+ &#39;scou&#39;: &#39;scout&#39;,
+ &#39;itialian&#39;: &#39;italian&#39;,
+ &#39;saldwich&#39;: &#39;sandwich&#39;,
+ &#39;crabless&#39;: &#39;crabless&#39;,
+ &#39;baclava&#39;: &#39;baclava&#39;,
+ &#39;muffi&#39;: &#39;muffin&#39;,
+ &#39;beanito&#39;: &#39;beanitos&#39;,
+ &#39;sorbe&#39;: &#39;sorbet&#39;,
+ &#39;tomat&#39;: &#39;tomato&#39;,
+ &#39;cheesebu&#39;: &#39;cheeseburger&#39;,
+ &#39;piec&#39;: &#39;piece&#39;,
+ &#39;casarole&#39;: &#39;casserole&#39;,
+ &#39;obrian&#39;: &#34;o&#39;brien&#39;s&#34;,
+ &#39;cheeseb&#39;: &#39;cheese&#39;,
+ &#39;zucchin&#39;: &#39;zucchini&#39;,
+ &#39;chetoes&#39;: &#39;cheetos&#39;,
+ &#39;pepperon&#39;: &#39;pepperoni&#39;,
+ &#39;lemonhead&#39;: &#39;lemonheads&#39;,
+ &#39;cheeese&#39;: &#39;cheese&#39;,
+ &#39;bonmi&#39;: &#39;banh mi&#39;,
+ &#39;zfruit&#39;: &#39;fruit&#39;,
+ &#39;sourdo&#39;: &#39;sourdough&#39;,
+ &#39;mushies&#39;: &#39;mushies&#39;,
+ &#39;saracha&#39;: &#39;sriracha&#39;,
+ &#39;chipeas&#39;: &#39;chickpeas&#39;,
+ &#39;pluota&#39;: &#39;pluots&#39;,
+ &#39;arbiola&#39;: &#39;arbiola&#39;,
+ &#39;seracha&#39;: &#39;sriracha&#39;,
+ &#39;achocolate&#39;: &#39;chocolate&#39;,
+ &#39;goulosh&#39;: &#39;goulash&#39;,
+ &#39;hambur&#39;: &#39;hamburger&#39;,
+ &#39;beeeeeer&#39;: &#39;beer&#39;,
+ &#39;bobba&#39;: &#39;boba&#39;,
+ &#39;krispey&#39;: &#39;krispy&#39;,
+ &#39;delicicious&#39;: &#39;delicious&#39;,
+ &#39;burbon&#39;: &#39;bourbon &#39;,
+ &#39;cooki&#39;: &#39;cookie&#39;,
+ &#39;dossidos&#39;: &#39;do-si-dos&#39;,
+ &#39;crasin&#39;: &#39;craisins&#39;,
+ &#39;tobasco&#39;: &#39;tabasco&#39;,
+ &#39;bellys&#39;: &#39;bellies&#39;,
+ &#39;shisito&#39;: &#39;shishito&#39;,
+ &#39;gellato&#39;: &#39;gelato&#39;,
+ &#39;lentals&#39;: &#39;lentils&#39;,
+ &#39;tarttar&#39;: &#39;tartar&#39;,
+ &#39;mmimm&#39;: &#39;?&#39;,
+ &#39;strawberrry&#39;: &#39;strawberry&#39;,
+ &#39;parmesian&#39;: &#39;parmesan&#39;,
+ &#39;cobler&#39;: &#39;cobbler&#39;,
+ &#39;bruled&#39;: &#39;brulee&#39;,
+ &#39;peperjack&#39;: &#39;pepper jack&#39;,
+ &#39;bolegnese&#39;: &#39;bolognese&#39;,
+ &#39;beana&#39;: &#39;beans&#39;,
+ &#39;abodo&#39;: &#39;adobo&#39;,
+ &#39;cheeae&#39;: &#39;cheese&#39;,
+ &#39;chicien&#39;: &#39;chicken&#39;,
+ &#39;buttwr&#39;: &#39;butter&#39;,
+ &#39;raspberrys&#39;: &#39;raspberry&#39;,
+ &#39;bolis&#39;: &#39;bolis&#39;,
+ &#39;ceral&#39;: &#39;cereal&#39;,
+ &#39;pepppers&#39;: &#39;peppers&#39;,
+ &#39;dounut&#39;: &#39;doughnut&#39;,
+ &#39;tatertos&#39;: &#39;tater tots&#39;,
+ &#39;tomoato&#39;: &#39;tomato&#39;,
+ &#39;shittake&#39;: &#39;shiitake&#39;,
+ &#39;kababs&#39;: &#39;kebabs&#39;,
+ &#39;cerrano&#39;: &#39;serrano&#39;,
+ &#39;jalepeo&#39;: &#39;jalapeno&#39;,
+ &#39;hawaian&#39;: &#39;hawaiian&#39;,
+ &#39;dresing&#39;: &#39;dressing&#39;,
+ &#39;philipino&#39;: &#39;filipino&#39;,
+ &#39;blackbeans&#39;: &#39;black beans&#39;,
+ &#39;bague&#39;: &#39;baguette&#39;,
+ &#39;greenbeans&#39;: &#39;green beans&#39;,
+ &#39;wallnuts&#39;: &#39;walnuts&#39;,
+ &#39;ygort&#39;: &#39;yogurt&#39;,
+ &#39;ndcup&#39;: &#39;cup&#39;,
+ &#39;aisian&#39;: &#39;asian&#39;,
+ &#39;cracke&#39;: &#39;cracker&#39;,
+ &#39;donettes&#39;: &#39;donettes&#39;,
+ &#39;sandwch&#39;: &#39;sandwich&#39;,
+ &#39;buscuit&#39;: &#39;biscuit&#39;,
+ &#39;staek&#39;: &#39;steak&#39;,
+ &#39;toadt&#39;: &#39;toast&#39;,
+ &#39;dandwich&#39;: &#39;sandwich&#39;,
+ &#39;cherriies&#39;: &#39;cherries&#39;,
+ &#39;buttr&#39;: &#39;butter&#39;,
+ &#39;cookiees&#39;: &#39;cookies&#39;,
+ &#39;weinies&#39;: &#39;wines&#39;,
+ ...}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
 
 </div>
     {% endraw %}
@@ -377,7 +1691,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="find_date" class="doc_header"><code>find_date</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L72" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>find_date</code>(<strong><code>data_source</code></strong>, <strong><code>col</code></strong>, <strong><code>h</code></strong>=<em><code>0</code></em>)</p>
+<h4 id="find_date" class="doc_header"><code>find_date</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L72" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>find_date</code>(<strong><code>data_source</code></strong>, <strong><code>col</code></strong>, <strong><code>h</code></strong>=<em><code>0</code></em>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -670,7 +1984,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="find_float_time" class="doc_header"><code>find_float_time</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L105" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>find_float_time</code>(<strong><code>data_scource</code></strong>, <strong><code>col</code></strong>, <strong><code>h</code></strong>=<em><code>0</code></em>)</p>
+<h4 id="find_float_time" class="doc_header"><code>find_float_time</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L105" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>find_float_time</code>(<strong><code>data_scource</code></strong>, <strong><code>col</code></strong>, <strong><code>h</code></strong>=<em><code>0</code></em>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -985,7 +2299,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="week_from_start" class="doc_header"><code>week_from_start</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L136" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>week_from_start</code>(<strong><code>data_scource</code></strong>, <strong><code>col</code></strong>, <strong><code>identifier</code></strong>)</p>
+<h4 id="week_from_start" class="doc_header"><code>week_from_start</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L136" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>week_from_start</code>(<strong><code>data_scource</code></strong>, <strong><code>col</code></strong>, <strong><code>identifier</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -1121,7 +2435,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="find_phase_duration" class="doc_header"><code>find_phase_duration</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L161" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>find_phase_duration</code>(<strong><code>df</code></strong>)</p>
+<h4 id="find_phase_duration" class="doc_header"><code>find_phase_duration</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L161" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>find_phase_duration</code>(<strong><code>df</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -1247,7 +2561,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="load_public_data" class="doc_header"><code>load_public_data</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L180" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_public_data</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>datetime_col</code></strong>, <strong><code>h</code></strong>)</p>
+<h4 id="load_public_data" class="doc_header"><code>load_public_data</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L180" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_public_data</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>datetime_col</code></strong>, <strong><code>h</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -1426,7 +2740,7 @@ Process includes:
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="in_good_logging_day" class="doc_header"><code>in_good_logging_day</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L255" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>in_good_logging_day</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_seperation</code></strong>=<em><code>4</code></em>)</p>
+<h4 id="in_good_logging_day" class="doc_header"><code>in_good_logging_day</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L255" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>in_good_logging_day</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_seperation</code></strong>=<em><code>4</code></em>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -1589,7 +2903,7 @@ Process includes:
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="clean_loggings" class="doc_header"><code>clean_loggings</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L290" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>clean_loggings</code>(<strong><code>data_scource</code></strong>, <strong><code>text_col</code></strong>, <strong><code>identifier</code></strong>)</p>
+<h4 id="clean_loggings" class="doc_header"><code>clean_loggings</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L290" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>clean_loggings</code>(<strong><code>data_scource</code></strong>, <strong><code>text_col</code></strong>, <strong><code>identifier</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 <p>This function convert all the loggings in the data_scource file into a list of typo-corrected items based on the text_col column. This function is based on a built-in vocabulary dictionary and an n-gram searcher.</p>
@@ -1708,7 +3022,7 @@ Process includes:
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_types" class="doc_header"><code>get_types</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L326" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_types</code>(<strong><code>data_scource</code></strong>, <strong><code>food_type</code></strong>)</p>
+<h4 id="get_types" class="doc_header"><code>get_types</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L326" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_types</code>(<strong><code>data_scource</code></strong>, <strong><code>food_type</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 <p>This function filters with the expected food types and return a cleaner version of data_scource file.</p>
@@ -1921,7 +3235,7 @@ Process includes:
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="count_caloric_entries" class="doc_header"><code>count_caloric_entries</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L364" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>count_caloric_entries</code>(<strong><code>df</code></strong>)</p>
+<h4 id="count_caloric_entries" class="doc_header"><code>count_caloric_entries</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L364" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>count_caloric_entries</code>(<strong><code>df</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -2004,7 +3318,7 @@ Process includes:
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_daily_eating_duration" class="doc_header"><code>mean_daily_eating_duration</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L385" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_daily_eating_duration</code>(<strong><code>df</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
+<h4 id="mean_daily_eating_duration" class="doc_header"><code>mean_daily_eating_duration</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L385" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_daily_eating_duration</code>(<strong><code>df</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -2096,7 +3410,7 @@ Process includes:
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="std_daily_eating_duration" class="doc_header"><code>std_daily_eating_duration</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L413" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>std_daily_eating_duration</code>(<strong><code>df</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
+<h4 id="std_daily_eating_duration" class="doc_header"><code>std_daily_eating_duration</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L413" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>std_daily_eating_duration</code>(<strong><code>df</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -2187,7 +3501,7 @@ Process includes:
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="earliest_entry" class="doc_header"><code>earliest_entry</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L441" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>earliest_entry</code>(<strong><code>df</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
+<h4 id="earliest_entry" class="doc_header"><code>earliest_entry</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L441" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>earliest_entry</code>(<strong><code>df</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -2277,7 +3591,7 @@ Process includes:
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_first_cal" class="doc_header"><code>mean_first_cal</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L466" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_first_cal</code>(<strong><code>df</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
+<h4 id="mean_first_cal" class="doc_header"><code>mean_first_cal</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L466" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_first_cal</code>(<strong><code>df</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -2411,7 +3725,7 @@ Name: Unnamed: 0, dtype: float64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="std_first_cal" class="doc_header"><code>std_first_cal</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L490" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>std_first_cal</code>(<strong><code>df</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
+<h4 id="std_first_cal" class="doc_header"><code>std_first_cal</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L490" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>std_first_cal</code>(<strong><code>df</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -2501,7 +3815,7 @@ Name: Unnamed: 0, dtype: float64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_last_cal" class="doc_header"><code>mean_last_cal</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L514" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_last_cal</code>(<strong><code>df</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
+<h4 id="mean_last_cal" class="doc_header"><code>mean_last_cal</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L514" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_last_cal</code>(<strong><code>df</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -2591,7 +3905,7 @@ Name: Unnamed: 0, dtype: float64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="std_last_cal" class="doc_header"><code>std_last_cal</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L538" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>std_last_cal</code>(<strong><code>df</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
+<h4 id="std_last_cal" class="doc_header"><code>std_last_cal</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L538" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>std_last_cal</code>(<strong><code>df</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -2681,7 +3995,7 @@ Name: Unnamed: 0, dtype: float64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="logging_day_counts" class="doc_header"><code>logging_day_counts</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L562" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>logging_day_counts</code>(<strong><code>df</code></strong>)</p>
+<h4 id="logging_day_counts" class="doc_header"><code>logging_day_counts</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L562" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>logging_day_counts</code>(<strong><code>df</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -2763,7 +4077,7 @@ Name: Unnamed: 0, dtype: float64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="find_missing_logging_days" class="doc_header"><code>find_missing_logging_days</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L579" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>find_missing_logging_days</code>(<strong><code>df</code></strong>, <strong><code>start_date</code></strong>=<em><code>'not_defined'</code></em>, <strong><code>end_date</code></strong>=<em><code>'not_defined'</code></em>)</p>
+<h4 id="find_missing_logging_days" class="doc_header"><code>find_missing_logging_days</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L579" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>find_missing_logging_days</code>(<strong><code>df</code></strong>, <strong><code>start_date</code></strong>=<em><code>'not_defined'</code></em>, <strong><code>end_date</code></strong>=<em><code>'not_defined'</code></em>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -2849,7 +4163,7 @@ Name: Unnamed: 0, dtype: float64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="good_lwa_day_counts" class="doc_header"><code>good_lwa_day_counts</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L615" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>good_lwa_day_counts</code>(<strong><code>df</code></strong>, <strong><code>window_start</code></strong>, <strong><code>window_end</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_seperation</code></strong>=<em><code>5</code></em>, <strong><code>buffer_time</code></strong>=<em><code>'15 minutes'</code></em>, <strong><code>h</code></strong>=<em><code>4</code></em>, <strong><code>start_date</code></strong>=<em><code>'not_defined'</code></em>, <strong><code>end_date</code></strong>=<em><code>'not_defined'</code></em>)</p>
+<h4 id="good_lwa_day_counts" class="doc_header"><code>good_lwa_day_counts</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L615" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>good_lwa_day_counts</code>(<strong><code>df</code></strong>, <strong><code>window_start</code></strong>, <strong><code>window_end</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_seperation</code></strong>=<em><code>5</code></em>, <strong><code>buffer_time</code></strong>=<em><code>'15 minutes'</code></em>, <strong><code>h</code></strong>=<em><code>4</code></em>, <strong><code>start_date</code></strong>=<em><code>'not_defined'</code></em>, <strong><code>end_date</code></strong>=<em><code>'not_defined'</code></em>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -2987,7 +4301,7 @@ A good window day is defined as a date that all the food loggings are within the
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="filtering_usable_data" class="doc_header"><code>filtering_usable_data</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L710" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>filtering_usable_data</code>(<strong><code>df</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>num_items</code></strong>, <strong><code>num_days</code></strong>)</p>
+<h4 id="filtering_usable_data" class="doc_header"><code>filtering_usable_data</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L710" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>filtering_usable_data</code>(<strong><code>df</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>num_items</code></strong>, <strong><code>num_days</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -3121,7 +4435,7 @@ A good window day is defined as a date that all the food loggings are within the
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="prepare_baseline_and_intervention_usable_data" class="doc_header"><code>prepare_baseline_and_intervention_usable_data</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L752" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_baseline_and_intervention_usable_data</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>baseline_num_items</code></strong>, <strong><code>baseline_num_days</code></strong>, <strong><code>intervention_num_items</code></strong>, <strong><code>intervention_num_days</code></strong>)</p>
+<h4 id="prepare_baseline_and_intervention_usable_data" class="doc_header"><code>prepare_baseline_and_intervention_usable_data</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L752" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_baseline_and_intervention_usable_data</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>baseline_num_items</code></strong>, <strong><code>baseline_num_days</code></strong>, <strong><code>intervention_num_items</code></strong>, <strong><code>intervention_num_days</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -3340,7 +4654,7 @@ A good window day is defined as a date that all the food loggings are within the
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="users_sorted_by_activity" class="doc_header"><code>users_sorted_by_activity</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L796" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>users_sorted_by_activity</code>(<strong><code>data_scource</code></strong>, <strong><code>food_type</code></strong>=<em><code>['f', 'b', 'm', 'w']</code></em>)</p>
+<h4 id="users_sorted_by_activity" class="doc_header"><code>users_sorted_by_activity</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L796" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>users_sorted_by_activity</code>(<strong><code>data_scource</code></strong>, <strong><code>food_type</code></strong>=<em><code>['f', 'b', 'm', 'w']</code></em>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -3476,7 +4790,7 @@ A good window day is defined as a date that all the food loggings are within the
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="eating_intervals_percentile" class="doc_header"><code>eating_intervals_percentile</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L836" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>eating_intervals_percentile</code>(<strong><code>data_scource</code></strong>, <strong><code>time_col</code></strong>, <strong><code>identifier</code></strong>)</p>
+<h4 id="eating_intervals_percentile" class="doc_header"><code>eating_intervals_percentile</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L836" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>eating_intervals_percentile</code>(<strong><code>data_scource</code></strong>, <strong><code>time_col</code></strong>, <strong><code>identifier</code></strong>)</p>
 </blockquote>
 <p>Description:
    This function calculates the .025, .05, .10, .125, .25, .5, .75, .875, .9, .95, .975 quantile of eating time and mid 95%, mid 90%, mid 80%, mid 75% and mid 50% duration for each user.</p>
@@ -3674,7 +4988,7 @@ A good window day is defined as a date that all the food loggings are within the
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="first_cal_analysis_summary" class="doc_header"><code>first_cal_analysis_summary</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L870" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>first_cal_analysis_summary</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_separation</code></strong>=<em><code>4</code></em>)</p>
+<h4 id="first_cal_analysis_summary" class="doc_header"><code>first_cal_analysis_summary</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L870" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>first_cal_analysis_summary</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_separation</code></strong>=<em><code>4</code></em>)</p>
 </blockquote>
 <p>Description:</p>
 <p>This function takes the loggings in good logging days and calculate the 5%,10%,25%,50%,75%,90%,95% quantile of first_cal time for each user.</p>
@@ -3824,7 +5138,7 @@ A good window day is defined as a date that all the food loggings are within the
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="last_cal_analysis_summary" class="doc_header"><code>last_cal_analysis_summary</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L912" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>last_cal_analysis_summary</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_separation</code></strong>=<em><code>4</code></em>)</p>
+<h4 id="last_cal_analysis_summary" class="doc_header"><code>last_cal_analysis_summary</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L912" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>last_cal_analysis_summary</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_separation</code></strong>=<em><code>4</code></em>)</p>
 </blockquote>
 <p>Description:</p>
 <p>This function takes the loggings in good logging days and calculate the 5%,10%,25%,50%,75%,90%,95% quantile of last_cal time for each user.</p>
@@ -3973,7 +5287,7 @@ A good window day is defined as a date that all the food loggings are within the
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="summarize_data" class="doc_header"><code>summarize_data</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L959" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>summarize_data</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>float_time_col</code></strong>, <strong><code>date_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_seperation</code></strong>=<em><code>4</code></em>)</p>
+<h4 id="summarize_data" class="doc_header"><code>summarize_data</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L959" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>summarize_data</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>float_time_col</code></strong>, <strong><code>date_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_seperation</code></strong>=<em><code>4</code></em>)</p>
 </blockquote>
 <p>Description:</p>
 <p>This function calculates num_days, num_total_items, num_f_n_b, num_medications, num_water, duration_mid_95, start_95, end_95, first_cal_avg, first_cal_std, last_cal_avg, last_cal_std, eating_win_avg, eating_win_std, adherent_count, first_cal variation (90%-10%), last_cal variation (90%-10%).</p>
@@ -4319,7 +5633,7 @@ A good window day is defined as a date that all the food loggings are within the
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="summarize_data_with_experiment_phases" class="doc_header"><code>summarize_data_with_experiment_phases</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L1056" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>summarize_data_with_experiment_phases</code>(<strong><code>food_data</code></strong>, <strong><code>ref_tbl</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_seperation</code></strong>=<em><code>5</code></em>, <strong><code>buffer_time</code></strong>=<em><code>'15 minutes'</code></em>, <strong><code>h</code></strong>=<em><code>4</code></em>, <strong><code>report_level</code></strong>=<em><code>2</code></em>, <strong><code>txt</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="summarize_data_with_experiment_phases" class="doc_header"><code>summarize_data_with_experiment_phases</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L1056" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>summarize_data_with_experiment_phases</code>(<strong><code>food_data</code></strong>, <strong><code>ref_tbl</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_seperation</code></strong>=<em><code>5</code></em>, <strong><code>buffer_time</code></strong>=<em><code>'15 minutes'</code></em>, <strong><code>h</code></strong>=<em><code>4</code></em>, <strong><code>report_level</code></strong>=<em><code>2</code></em>, <strong><code>txt</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Description:</p>
 
@@ -4739,7 +6053,7 @@ Participant yrt2000 have non adherent day(s) in the following day(s):
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="first_cal_mean_with_error_bar" class="doc_header"><code>first_cal_mean_with_error_bar</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L1261" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>first_cal_mean_with_error_bar</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_separation</code></strong>=<em><code>4</code></em>)</p>
+<h4 id="first_cal_mean_with_error_bar" class="doc_header"><code>first_cal_mean_with_error_bar</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L1261" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>first_cal_mean_with_error_bar</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_separation</code></strong>=<em><code>4</code></em>)</p>
 </blockquote>
 <p>Description:</p>
 <p>This function takes the loggings in good logging days, calculates the means and standard deviations of first_cal time for each participant and represent the calculated data with a scatter plot where the x axis is participants and the y axis is hours in a day.</p>
@@ -4827,7 +6141,7 @@ Participant yrt2000 have non adherent day(s) in the following day(s):
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="last_cal_mean_with_error_bar" class="doc_header"><code>last_cal_mean_with_error_bar</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L1308" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>last_cal_mean_with_error_bar</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_separation</code></strong>=<em><code>4</code></em>)</p>
+<h4 id="last_cal_mean_with_error_bar" class="doc_header"><code>last_cal_mean_with_error_bar</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L1308" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>last_cal_mean_with_error_bar</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_separation</code></strong>=<em><code>4</code></em>)</p>
 </blockquote>
 <p>Description:</p>
 <p>This function takes the loggings in good logging days, calculates the means and standard deviations of last_cal time for each participant and represent the calculated data with a scatter plot where the x axis is participants and the y axis is hours in a day.</p>
@@ -4915,7 +6229,7 @@ Participant yrt2000 have non adherent day(s) in the following day(s):
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="first_cal_analysis_variability_plot" class="doc_header"><code>first_cal_analysis_variability_plot</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L1355" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>first_cal_analysis_variability_plot</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_separation</code></strong>=<em><code>4</code></em>)</p>
+<h4 id="first_cal_analysis_variability_plot" class="doc_header"><code>first_cal_analysis_variability_plot</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L1355" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>first_cal_analysis_variability_plot</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_separation</code></strong>=<em><code>4</code></em>)</p>
 </blockquote>
 <p>Description:</p>
 <p>This function calculates the variability of loggings in good logging day by subtracting 5%,10%,25%,50%,75%,90%,95% quantile of first_cal time from the 50% first_cal time. It can also make a histogram that represents the 90%-10% interval for all subjects.</p>
@@ -5004,7 +6318,7 @@ Participant yrt2000 have non adherent day(s) in the following day(s):
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="last_cal_analysis_variability_plot" class="doc_header"><code>last_cal_analysis_variability_plot</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L1408" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>last_cal_analysis_variability_plot</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_separation</code></strong>=<em><code>4</code></em>)</p>
+<h4 id="last_cal_analysis_variability_plot" class="doc_header"><code>last_cal_analysis_variability_plot</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L1408" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>last_cal_analysis_variability_plot</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>, <strong><code>min_log_num</code></strong>=<em><code>2</code></em>, <strong><code>min_separation</code></strong>=<em><code>4</code></em>)</p>
 </blockquote>
 <p>Description:</p>
 <p>This function calculates the variability of loggings in good logging day by subtracting 5%,10%,25%,50%,75%,90%,95% quantile of last_cal time from the 50% last_cal time and makes a histogram that represents the 90%-10% interval for all subjects.</p>
@@ -5092,7 +6406,7 @@ Participant yrt2000 have non adherent day(s) in the following day(s):
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="first_cal_avg_histplot" class="doc_header"><code>first_cal_avg_histplot</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L1459" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>first_cal_avg_histplot</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
+<h4 id="first_cal_avg_histplot" class="doc_header"><code>first_cal_avg_histplot</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L1459" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>first_cal_avg_histplot</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 <p>This function take the first caloric event (no water or med) and calculate average event's time for “each participant”.</p>
@@ -5184,7 +6498,7 @@ Participant yrt2000 have non adherent day(s) in the following day(s):
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="first_cal_sample_distplot" class="doc_header"><code>first_cal_sample_distplot</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L1489" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>first_cal_sample_distplot</code>(<strong><code>data_scource</code></strong>, <strong><code>n</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
+<h4 id="first_cal_sample_distplot" class="doc_header"><code>first_cal_sample_distplot</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L1489" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>first_cal_sample_distplot</code>(<strong><code>data_scource</code></strong>, <strong><code>n</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 <p>This function plots the distplot for the first_cal time from n participants that will be randomly selected with replacement.</p>
@@ -5292,7 +6606,7 @@ alqt21525720972
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="last_cal_avg_histplot" class="doc_header"><code>last_cal_avg_histplot</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L1524" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>last_cal_avg_histplot</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
+<h4 id="last_cal_avg_histplot" class="doc_header"><code>last_cal_avg_histplot</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L1524" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>last_cal_avg_histplot</code>(<strong><code>data_scource</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 <p>This function take the last caloric event (no water or med) and calculate average event's time for “each participant”.</p>
@@ -5383,7 +6697,7 @@ alqt21525720972
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="last_cal_sample_distplot" class="doc_header"><code>last_cal_sample_distplot</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L1554" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>last_cal_sample_distplot</code>(<strong><code>data_scource</code></strong>, <strong><code>n</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
+<h4 id="last_cal_sample_distplot" class="doc_header"><code>last_cal_sample_distplot</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L1554" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>last_cal_sample_distplot</code>(<strong><code>data_scource</code></strong>, <strong><code>n</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 <p>This function plots the distplot for the last_cal time from n participants that will be randomly selected with replacement.</p>
@@ -5487,7 +6801,7 @@ alqt14018795225
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="swarmplot" class="doc_header"><code>swarmplot</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L1589" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>swarmplot</code>(<strong><code>data_scource</code></strong>, <strong><code>max_loggings</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
+<h4 id="swarmplot" class="doc_header"><code>swarmplot</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L1589" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>swarmplot</code>(<strong><code>data_scource</code></strong>, <strong><code>max_loggings</code></strong>, <strong><code>identifier</code></strong>, <strong><code>date_col</code></strong>, <strong><code>time_col</code></strong>)</p>
 </blockquote>
 <p>Description:</p>
 <p>This function plots the swarmplot the participants from the data_scource file.</p>
@@ -5580,7 +6894,7 @@ alqt14018795225
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="FoodParser" class="doc_header"><code>class</code> <code>FoodParser</code><a href="https://github.com/QiwenZz/treets/tree/master/treets/core.py#L1648" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FoodParser</code>()</p>
+<h2 id="FoodParser" class="doc_header"><code>class</code> <code>FoodParser</code><a href="https://github.com/FleischerResearchLab/treets/tree/master/treets/core.py#L1648" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FoodParser</code>()</p>
 </blockquote>
 <p>A class that reads in food loggings from the app. Used as helper function for the function clean_loggings().</p>
 
