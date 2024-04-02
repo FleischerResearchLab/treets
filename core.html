@@ -1,0 +1,4188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.552">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Process collected data from the myCircadianClock app.">
+
+<title>treets - Time Restricted Eating ExperimenTS API</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="treets - Time Restricted Eating ExperimenTS API">
+<meta property="og:description" content="Process collected data from the myCircadianClock app.">
+<meta property="og:site_name" content="treets">
+<meta name="twitter:title" content="treets - Time Restricted Eating ExperimenTS API">
+<meta name="twitter:description" content="Process collected data from the myCircadianClock app.">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">treets</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./core.html">Time Restricted Eating ExperimenTS API</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TREETS</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./core.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Time Restricted Eating ExperimenTS API</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#utils" id="toc-utils" class="nav-link active" data-scroll-target="#utils">Utils</a>
+  <ul class="collapse">
+  <li><a href="#file_loader" id="toc-file_loader" class="nav-link" data-scroll-target="#file_loader">file_loader</a></li>
+  <li><a href="#find_date" id="toc-find_date" class="nav-link" data-scroll-target="#find_date">find_date</a></li>
+  <li><a href="#find_float_time" id="toc-find_float_time" class="nav-link" data-scroll-target="#find_float_time">find_float_time</a></li>
+  <li><a href="#week_from_start" id="toc-week_from_start" class="nav-link" data-scroll-target="#week_from_start">week_from_start</a></li>
+  <li><a href="#find_phase_duration" id="toc-find_phase_duration" class="nav-link" data-scroll-target="#find_phase_duration">find_phase_duration</a></li>
+  <li><a href="#load_food_data" id="toc-load_food_data" class="nav-link" data-scroll-target="#load_food_data">load_food_data</a></li>
+  <li><a href="#in_good_logging_day" id="toc-in_good_logging_day" class="nav-link" data-scroll-target="#in_good_logging_day">in_good_logging_day</a></li>
+  <li><a href="#foodparser" id="toc-foodparser" class="nav-link" data-scroll-target="#foodparser">FoodParser</a></li>
+  <li><a href="#clean_loggings" id="toc-clean_loggings" class="nav-link" data-scroll-target="#clean_loggings">clean_loggings</a></li>
+  <li><a href="#get_types" id="toc-get_types" class="nav-link" data-scroll-target="#get_types">get_types</a></li>
+  <li><a href="#count_caloric_entries" id="toc-count_caloric_entries" class="nav-link" data-scroll-target="#count_caloric_entries">count_caloric_entries</a></li>
+  <li><a href="#mean_daily_eating_duration" id="toc-mean_daily_eating_duration" class="nav-link" data-scroll-target="#mean_daily_eating_duration">mean_daily_eating_duration</a></li>
+  <li><a href="#std_daily_eating_duration" id="toc-std_daily_eating_duration" class="nav-link" data-scroll-target="#std_daily_eating_duration">std_daily_eating_duration</a></li>
+  <li><a href="#earliest_entry" id="toc-earliest_entry" class="nav-link" data-scroll-target="#earliest_entry">earliest_entry</a></li>
+  <li><a href="#mean_first_cal" id="toc-mean_first_cal" class="nav-link" data-scroll-target="#mean_first_cal">mean_first_cal</a></li>
+  <li><a href="#std_first_cal" id="toc-std_first_cal" class="nav-link" data-scroll-target="#std_first_cal">std_first_cal</a></li>
+  <li><a href="#mean_last_cal" id="toc-mean_last_cal" class="nav-link" data-scroll-target="#mean_last_cal">mean_last_cal</a></li>
+  <li><a href="#std_last_cal" id="toc-std_last_cal" class="nav-link" data-scroll-target="#std_last_cal">std_last_cal</a></li>
+  <li><a href="#mean_daily_eating_occasions" id="toc-mean_daily_eating_occasions" class="nav-link" data-scroll-target="#mean_daily_eating_occasions">mean_daily_eating_occasions</a></li>
+  <li><a href="#std_daily_eating_occasions" id="toc-std_daily_eating_occasions" class="nav-link" data-scroll-target="#std_daily_eating_occasions">std_daily_eating_occasions</a></li>
+  <li><a href="#mean_daily_eating_midpoint" id="toc-mean_daily_eating_midpoint" class="nav-link" data-scroll-target="#mean_daily_eating_midpoint">mean_daily_eating_midpoint</a></li>
+  <li><a href="#std_daily_eating_midpoint" id="toc-std_daily_eating_midpoint" class="nav-link" data-scroll-target="#std_daily_eating_midpoint">std_daily_eating_midpoint</a></li>
+  <li><a href="#logging_day_counts" id="toc-logging_day_counts" class="nav-link" data-scroll-target="#logging_day_counts">logging_day_counts</a></li>
+  <li><a href="#find_missing_logging_days" id="toc-find_missing_logging_days" class="nav-link" data-scroll-target="#find_missing_logging_days">find_missing_logging_days</a></li>
+  <li><a href="#good_lwa_day_counts" id="toc-good_lwa_day_counts" class="nav-link" data-scroll-target="#good_lwa_day_counts">good_lwa_day_counts</a></li>
+  </ul></li>
+  <li><a href="#experiment-design" id="toc-experiment-design" class="nav-link" data-scroll-target="#experiment-design">Experiment Design</a>
+  <ul class="collapse">
+  <li><a href="#filtering_usable_data" id="toc-filtering_usable_data" class="nav-link" data-scroll-target="#filtering_usable_data">filtering_usable_data</a></li>
+  <li><a href="#prepare_baseline_and_intervention_usable_data" id="toc-prepare_baseline_and_intervention_usable_data" class="nav-link" data-scroll-target="#prepare_baseline_and_intervention_usable_data">prepare_baseline_and_intervention_usable_data</a></li>
+  </ul></li>
+  <li><a href="#analysis-and-data-summaries" id="toc-analysis-and-data-summaries" class="nav-link" data-scroll-target="#analysis-and-data-summaries">Analysis and Data Summaries</a>
+  <ul class="collapse">
+  <li><a href="#users_sorted_by_logging" id="toc-users_sorted_by_logging" class="nav-link" data-scroll-target="#users_sorted_by_logging">users_sorted_by_logging</a></li>
+  <li><a href="#eating_intervals_percentile" id="toc-eating_intervals_percentile" class="nav-link" data-scroll-target="#eating_intervals_percentile">eating_intervals_percentile</a></li>
+  <li><a href="#first_cal_analysis_summary" id="toc-first_cal_analysis_summary" class="nav-link" data-scroll-target="#first_cal_analysis_summary">first_cal_analysis_summary</a></li>
+  <li><a href="#last_cal_analysis_summary" id="toc-last_cal_analysis_summary" class="nav-link" data-scroll-target="#last_cal_analysis_summary">last_cal_analysis_summary</a></li>
+  <li><a href="#summarize_data" id="toc-summarize_data" class="nav-link" data-scroll-target="#summarize_data">summarize_data</a></li>
+  <li><a href="#summarize_data_with_experiment_phases" id="toc-summarize_data_with_experiment_phases" class="nav-link" data-scroll-target="#summarize_data_with_experiment_phases">summarize_data_with_experiment_phases</a></li>
+  </ul></li>
+  <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots">Plots</a>
+  <ul class="collapse">
+  <li><a href="#first_cal_mean_with_error_bar" id="toc-first_cal_mean_with_error_bar" class="nav-link" data-scroll-target="#first_cal_mean_with_error_bar">first_cal_mean_with_error_bar</a></li>
+  <li><a href="#last_cal_mean_with_error_bar" id="toc-last_cal_mean_with_error_bar" class="nav-link" data-scroll-target="#last_cal_mean_with_error_bar">last_cal_mean_with_error_bar</a></li>
+  <li><a href="#first_cal_analysis_variability_plot" id="toc-first_cal_analysis_variability_plot" class="nav-link" data-scroll-target="#first_cal_analysis_variability_plot">first_cal_analysis_variability_plot</a></li>
+  <li><a href="#last_cal_analysis_variability_plot" id="toc-last_cal_analysis_variability_plot" class="nav-link" data-scroll-target="#last_cal_analysis_variability_plot">last_cal_analysis_variability_plot</a></li>
+  <li><a href="#first_cal_avg_histplot" id="toc-first_cal_avg_histplot" class="nav-link" data-scroll-target="#first_cal_avg_histplot">first_cal_avg_histplot</a></li>
+  <li><a href="#first_cal_sample_distplot" id="toc-first_cal_sample_distplot" class="nav-link" data-scroll-target="#first_cal_sample_distplot">first_cal_sample_distplot</a></li>
+  <li><a href="#last_cal_avg_histplot" id="toc-last_cal_avg_histplot" class="nav-link" data-scroll-target="#last_cal_avg_histplot">last_cal_avg_histplot</a></li>
+  <li><a href="#last_cal_sample_distplot" id="toc-last_cal_sample_distplot" class="nav-link" data-scroll-target="#last_cal_sample_distplot">last_cal_sample_distplot</a></li>
+  <li><a href="#swarmplot" id="toc-swarmplot" class="nav-link" data-scroll-target="#swarmplot">swarmplot</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/FleischerResearchLab/treets/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Time Restricted Eating ExperimenTS API</h1>
+</div>
+
+<div>
+  <div class="description">
+    Process collected data from the myCircadianClock app.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="utils" class="level2">
+<h2 class="anchored" data-anchor-id="utils">Utils</h2>
+<p>These functions primarily serve as parts of other functions, but are provided here for utility.</p>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L48" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="file_loader" class="level3">
+<h3 class="anchored" data-anchor-id="file_loader">file_loader</h3>
+<blockquote class="blockquote">
+<pre><code> file_loader (data_source:Union[str,pandas.core.frame.DataFrame])</code></pre>
+</blockquote>
+<p>Flexible file loader able to read a single file path or folder path. Accepts .csv and .json file format loading.</p>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 38%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame.<br>Existing dataframes are read as is.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+<td><strong>A single dataframe consisting of all data matching the provided file or folder path.</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Providing the file loader with a specific file path outputs a single Pandas dataframe generated from that data source.</p>
+<div id="cell-6" class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>file_loader(<span class="st">"data/col_test_data/toy_data_2000.csv"</span>).head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">original_logtime</th>
+<th data-quarto-table-cell-role="th">desc_text</th>
+<th data-quarto-table-cell-role="th">food_type</th>
+<th data-quarto-table-cell-role="th">PID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2021-05-12 02:30:00 +0000</td>
+<td>milk</td>
+<td>b</td>
+<td>yrt1999</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2021-05-12 02:45:00 +0000</td>
+<td>some medication</td>
+<td>m</td>
+<td>yrt1999</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>The file loader can also accept string patterns to read in multiple files at once. Providing a patterened path such as yrt*_food_data*.csv would load all data matching this pattern.</p>
+<div id="cell-8" class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>file_loader(<span class="st">'data/col_test_data/yrt*_food_data*.csv'</span>).head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">original_logtime</th>
+<th data-quarto-table-cell-role="th">desc_text</th>
+<th data-quarto-table-cell-role="th">food_type</th>
+<th data-quarto-table-cell-role="th">PID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2021-05-12 02:30:00 +0000</td>
+<td>Milk</td>
+<td>b</td>
+<td>yrt1999</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2021-05-12 02:45:00 +0000</td>
+<td>Some Medication</td>
+<td>m</td>
+<td>yrt1999</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>It can also handle reading mixed file types. The below dataframe consists of data read from all .json and .csv files in the <em>data/output/</em> folder.</p>
+<div id="cell-10" class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>file_loader(<span class="st">'data/output/*'</span>).head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ID</th>
+<th data-quarto-table-cell-role="th">unique_code</th>
+<th data-quarto-table-cell-role="th">research_info_id</th>
+<th data-quarto-table-cell-role="th">desc_text</th>
+<th data-quarto-table-cell-role="th">food_type</th>
+<th data-quarto-table-cell-role="th">original_logtime</th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">local_time</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">week_from_start</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">cleaned</th>
+<th data-quarto-table-cell-role="th">day_count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>7572733.0</td>
+<td>alqt14018795225</td>
+<td>150.0</td>
+<td>Water</td>
+<td>w</td>
+<td>2017-12-08 17:30:00+00:00</td>
+<td>2017-12-08</td>
+<td>17.500000</td>
+<td>17:30:00</td>
+<td>1.0</td>
+<td>2017.0</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>411111.0</td>
+<td>alqt14018795225</td>
+<td>150.0</td>
+<td>Coffee White</td>
+<td>b</td>
+<td>2017-12-09 00:01:00+00:00</td>
+<td>2017-12-08</td>
+<td>24.016667</td>
+<td>00:01:00</td>
+<td>1.0</td>
+<td>2017.0</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L85" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="find_date" class="level3">
+<h3 class="anchored" data-anchor-id="find_date">find_date</h3>
+<blockquote class="blockquote">
+<pre><code> find_date (data_source:Union[str,pandas.core.frame.DataFrame], h:int=4,
+            date_col:int=5)</code></pre>
+</blockquote>
+<p>Extracts date from a datetime column after shifting datetime by ‘h’ hours. A day starts ‘h’ hours early if ‘h’ is negative, or ‘h’ hours later if ‘h’ is positive.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is.</td>
+</tr>
+<tr class="even">
+<td>h</td>
+<td>int</td>
+<td>4</td>
+<td>Number of hours to shift the definition for ‘date’ by. h = 4 would shift days so that time membership<br>to each date starts at 4:00 AM and ends at 3:59:59 AM the next calendar day.</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>5</td>
+<td>Column number for existing datetime column in provided data source. Data exported from mCC typically<br>has datetime as its 5th column (with indexing starting from 0).</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>pd.Series</strong></td>
+<td></td>
+<td><strong>Series of dates in ISO 8601 format.</strong></td>
+</tr>
+</tbody>
+</table>
+<p>By default, find_date expects log dates for studies to begin at 4:00 AM. To use regular calendar dates, remember to set h = 0.</p>
+<div id="cell-13" class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> file_loader(<span class="st">'data/test_food_details.csv'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'original_logtime'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'original_logtime'</span>])</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'date'</span>] <span class="op">=</span> find_date(df, h <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'original_logtime'</span>, <span class="st">'date'</span>]].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">original_logtime</th>
+<th data-quarto-table-cell-role="th">date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2017-12-08 17:30:00+00:00</td>
+<td>2017-12-08</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2017-12-09 00:01:00+00:00</td>
+<td>2017-12-09</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2017-12-09 00:58:00+00:00</td>
+<td>2017-12-09</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>In this example, with log dates starting at the default value of 4 (4:00 AM), we see that two logs from very early morning on 2017-12-09 are counted as being logged on 2017-12-08 instead.</p>
+<div id="cell-15" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'date'</span>] <span class="op">=</span> find_date(df, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'original_logtime'</span>, <span class="st">'date'</span>]].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">original_logtime</th>
+<th data-quarto-table-cell-role="th">date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2017-12-08 17:30:00+00:00</td>
+<td>2017-12-08</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2017-12-09 00:01:00+00:00</td>
+<td>2017-12-08</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2017-12-09 00:58:00+00:00</td>
+<td>2017-12-08</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>Similarly, in an example where we start log days four hours earlier, the last two rows have dates that are shifted so their log date is one day later than their exact calendar datetime.</p>
+<div id="cell-17" class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'date'</span>] <span class="op">=</span> find_date(df, h <span class="op">=</span> <span class="op">-</span><span class="dv">4</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'original_logtime'</span>, <span class="st">'date'</span>]].head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">original_logtime</th>
+<th data-quarto-table-cell-role="th">date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2017-12-08 17:30:00+00:00</td>
+<td>2017-12-08</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2017-12-09 00:01:00+00:00</td>
+<td>2017-12-09</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2017-12-09 00:58:00+00:00</td>
+<td>2017-12-09</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2018-02-22 21:52:00+00:00</td>
+<td>2018-02-23</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2018-02-22 22:53:00+00:00</td>
+<td>2018-02-23</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L129" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="find_float_time" class="level3">
+<h3 class="anchored" data-anchor-id="find_float_time">find_float_time</h3>
+<blockquote class="blockquote">
+<pre><code> find_float_time (data_source:Union[str,pandas.core.frame.DataFrame],
+                  h:int=4, date_col:int=5)</code></pre>
+</blockquote>
+<p>Extracts time from a datetime column after shifting datetime by ‘h’ hours. A day starts ‘h’ hours early if ‘h’ is negative, or ‘h’ hours later if ‘h’ is positive.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is.</td>
+</tr>
+<tr class="even">
+<td>h</td>
+<td>int</td>
+<td>4</td>
+<td>Number of hours to shift the definition for ‘time’ by. h = 4 would allow float representations of time<br>between 4 (inclusive) and 28 (exclusive), representing time that goes from 4:00 AM to 3:59:59 AM the next<br>calendar day. NOTE: h value for this function should match the h value used for generating dates.</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>5</td>
+<td>Column number for existing datetime column in provided data source. Data exported from mCC typically<br>has datetime as its 5th column (with indexing starting from 0).</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>pd.Series</strong></td>
+<td></td>
+<td><strong>Series of times in float format (e.g.&nbsp;4:36 AM -&gt; 4.6).</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-19" class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> file_loader(<span class="st">'data/test_food_details.csv'</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'original_logtime'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'original_logtime'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>By default, find_float_time expects studies to begin at 4:00 AM. To preserve regular calendar dates use h = 0.</p>
+<div id="cell-21" class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'float_time'</span>] <span class="op">=</span> find_float_time(df, h <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'original_logtime'</span>, <span class="st">'float_time'</span>]].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">original_logtime</th>
+<th data-quarto-table-cell-role="th">float_time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2017-12-08 17:30:00+00:00</td>
+<td>17.500000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2017-12-09 00:01:00+00:00</td>
+<td>0.016667</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2017-12-09 00:58:00+00:00</td>
+<td>0.966667</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>Using positive values for h for both date and float time functions changes date ownership for a row based on its original logtime. Float time should be shifted by the same h value as date membership so that times belonging to a different calendar date can be differentiated when necessary (e.g.&nbsp;2:00 AM –&gt; 2.0, whereas 2:00 AM the next calendar day –&gt; 26.0, for cases where these rows should still be grouped together on the same logging date).</p>
+<div id="cell-23" class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'float_time'</span>] <span class="op">=</span> find_float_time(df, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'date'</span>] <span class="op">=</span> find_date(df, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'original_logtime'</span>,<span class="st">'date'</span>, <span class="st">'float_time'</span>]].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">original_logtime</th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">float_time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2017-12-08 17:30:00+00:00</td>
+<td>2017-12-08</td>
+<td>17.500000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2017-12-09 00:01:00+00:00</td>
+<td>2017-12-08</td>
+<td>24.016667</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2017-12-09 00:58:00+00:00</td>
+<td>2017-12-08</td>
+<td>24.966667</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>In rare cases, it may be valuable to shift date and time by negative values. In this example where a log date starts at 8:00 PM the previous calendar day and ends at 8:00 PM the current calendar day, note that the last two rows have negative float times and their date membership is shifted one date further than their original calendar datetime.</p>
+<div id="cell-25" class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'float_time'</span>] <span class="op">=</span> find_float_time(df, h <span class="op">=</span> <span class="op">-</span><span class="dv">4</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'date'</span>] <span class="op">=</span> find_date(df, h <span class="op">=</span> <span class="op">-</span><span class="dv">4</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'original_logtime'</span>,<span class="st">'date'</span>, <span class="st">'float_time'</span>]].head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">original_logtime</th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">float_time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2017-12-08 17:30:00+00:00</td>
+<td>2017-12-08</td>
+<td>17.500000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2017-12-09 00:01:00+00:00</td>
+<td>2017-12-09</td>
+<td>0.016667</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2017-12-09 00:58:00+00:00</td>
+<td>2017-12-09</td>
+<td>0.966667</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2018-02-22 21:52:00+00:00</td>
+<td>2018-02-23</td>
+<td>-2.133333</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2018-02-22 22:53:00+00:00</td>
+<td>2018-02-23</td>
+<td>-1.116667</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L174" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="week_from_start" class="level3">
+<h3 class="anchored" data-anchor-id="week_from_start">week_from_start</h3>
+<blockquote class="blockquote">
+<pre><code> week_from_start (data_source:Union[str,pandas.core.frame.DataFrame],
+                  identifier:int=1)</code></pre>
+</blockquote>
+<p>Calculates the number of weeks between each logging entry and the first logging entry for each participant. A ‘date’ column must exist in the provided data source. Using the provided find_date function is recommended.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column (with indexing starting from 0).</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>np.array</strong></td>
+<td></td>
+<td><strong>Array of weeks passed from log date to the minimum date for each participant.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-27" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> file_loader(<span class="st">'data/test_food_details.csv'</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'original_logtime'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'original_logtime'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Using find_date to ensure that a date column exists in the data source is recommended. A column labeled ‘date’ is a requirement of this function.</p>
+<div id="cell-29" class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'date'</span>] <span class="op">=</span> find_date(df)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'week_from_start'</span>] <span class="op">=</span> week_from_start(df)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'unique_code'</span>,<span class="st">'original_logtime'</span>,<span class="st">'week_from_start'</span>]][<span class="dv">2</span>:<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">unique_code</th>
+<th data-quarto-table-cell-role="th">original_logtime</th>
+<th data-quarto-table-cell-role="th">week_from_start</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>alqt14018795225</td>
+<td>2017-12-09 00:58:00+00:00</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>alqt14018795225</td>
+<td>2018-02-22 21:52:00+00:00</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L213" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="find_phase_duration" class="level3">
+<h3 class="anchored" data-anchor-id="find_phase_duration">find_phase_duration</h3>
+<blockquote class="blockquote">
+<pre><code> find_phase_duration (df:pandas.core.frame.DataFrame)</code></pre>
+</blockquote>
+<p>Calculates the duration (in days) of the study phase for each row.</p>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 38%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td>Participant information dataframe with columns for start and ending date for that row’s study phase.<br>The expected column numbers for starting and ending dates are outlined in the HOWTO document that accompanies TREETS.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+<td><strong>Dataframe with an additional column describing study phase duration.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-31" class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>find_phase_duration(pd.read_excel(<span class="st">'data/col_test_data/toy_data_17May2021.xlsx'</span>))[[<span class="st">'phase_duration'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">phase_duration</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>3 days</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>4 days</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3 days</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4 days</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>NaT</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L244" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="load_food_data" class="level3">
+<h3 class="anchored" data-anchor-id="load_food_data">load_food_data</h3>
+<blockquote class="blockquote">
+<pre><code> load_food_data (data_source:Union[str,pandas.core.frame.DataFrame],
+                 h:int, identifier:int=1, datetime_col:int=5)</code></pre>
+</blockquote>
+<p>Loads and processes existing logging data, adding specific datetime information in formats more suitable for TREETS functions.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is.</td>
+</tr>
+<tr class="even">
+<td>h</td>
+<td>int</td>
+<td></td>
+<td>Number of hours to shift the definition of ‘date’ by. h = 4 would indicate that a log date begins at<br>4:00 AM and ends the following calendar day at 3:59:59 AM. Float representations of time would therefore<br>go from 4.0 (inclusive) to 28.0 (exclusive) to represent ‘date’ membership for days shifted from their<br>original calendar date.</td>
+</tr>
+<tr class="odd">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column (with indexing starting from 0).</td>
+</tr>
+<tr class="even">
+<td>datetime_col</td>
+<td>int</td>
+<td>5</td>
+<td>Column number for an existing datetime column in provided data source. Data exported from mCC typically<br>has datetime as its 5th column (with indexing starting from 0).</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+<td></td>
+<td><strong>Dataframe with additional date, float time, and week from start columns.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-33" class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>).head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ID</th>
+<th data-quarto-table-cell-role="th">unique_code</th>
+<th data-quarto-table-cell-role="th">research_info_id</th>
+<th data-quarto-table-cell-role="th">desc_text</th>
+<th data-quarto-table-cell-role="th">food_type</th>
+<th data-quarto-table-cell-role="th">original_logtime</th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">float_time</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">week_from_start</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>7572733</td>
+<td>alqt14018795225</td>
+<td>150</td>
+<td>Water</td>
+<td>w</td>
+<td>2017-12-08 17:30:00+00:00</td>
+<td>2017-12-08</td>
+<td>17.500000</td>
+<td>17:30:00</td>
+<td>1</td>
+<td>2017</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>411111</td>
+<td>alqt14018795225</td>
+<td>150</td>
+<td>Coffee White</td>
+<td>b</td>
+<td>2017-12-09 00:01:00+00:00</td>
+<td>2017-12-08</td>
+<td>24.016667</td>
+<td>00:01:00</td>
+<td>1</td>
+<td>2017</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L320" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="in_good_logging_day" class="level3">
+<h3 class="anchored" data-anchor-id="in_good_logging_day">in_good_logging_day</h3>
+<blockquote class="blockquote">
+<pre><code> in_good_logging_day (data_source:Union[str,pandas.core.frame.DataFrame],
+                      min_log_num:int=2, min_separation:int=5,
+                      identifier:int=1, date_col:int=6, time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates if each log is considered to be within a ‘good logging day’. A log day is considered ‘good’ if there are at least the minimum number of required logs, with a minimum specified hour separation between the first and last log for that log date. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is.</td>
+</tr>
+<tr class="even">
+<td>min_log_num</td>
+<td>int</td>
+<td>2</td>
+<td>Minimum number of logs required for a day to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="odd">
+<td>min_separation</td>
+<td>int</td>
+<td>5</td>
+<td>Minimum number of hours between first and last log on a log day for it to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column (with indexing starting from 0).</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="even">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>np.array</strong></td>
+<td></td>
+<td><strong>Boolean array describing whether each log is a ‘good’ logging day.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-35" class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'in_good_logging_day'</span>] <span class="op">=</span> in_good_logging_day(df)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ID</th>
+<th data-quarto-table-cell-role="th">unique_code</th>
+<th data-quarto-table-cell-role="th">research_info_id</th>
+<th data-quarto-table-cell-role="th">desc_text</th>
+<th data-quarto-table-cell-role="th">food_type</th>
+<th data-quarto-table-cell-role="th">original_logtime</th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">float_time</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">week_from_start</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">in_good_logging_day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>7572733</td>
+<td>alqt14018795225</td>
+<td>150</td>
+<td>Water</td>
+<td>w</td>
+<td>2017-12-08 17:30:00+00:00</td>
+<td>2017-12-08</td>
+<td>17.500000</td>
+<td>17:30:00</td>
+<td>1</td>
+<td>2017</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>411111</td>
+<td>alqt14018795225</td>
+<td>150</td>
+<td>Coffee White</td>
+<td>b</td>
+<td>2017-12-09 00:01:00+00:00</td>
+<td>2017-12-08</td>
+<td>24.016667</td>
+<td>00:01:00</td>
+<td>1</td>
+<td>2017</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L385" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="foodparser" class="level3">
+<h3 class="anchored" data-anchor-id="foodparser">FoodParser</h3>
+<blockquote class="blockquote">
+<pre><code> FoodParser ()</code></pre>
+</blockquote>
+<p>Food parser handles taking unprocessed food log entries and adding relevant information from a pre-made dictionary. This includes matching unprocessed terms to their likely matches, adding food type and other identifying information.</p>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L950" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="clean_loggings" class="level3">
+<h3 class="anchored" data-anchor-id="clean_loggings">clean_loggings</h3>
+<blockquote class="blockquote">
+<pre><code> clean_loggings (data_source:Union[str,pandas.core.frame.DataFrame],
+                 identifier:int=1)</code></pre>
+</blockquote>
+<p>Cleans and attempts typo correction for all logging text entries.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column (with indexing starting from 0).</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+<td></td>
+<td><strong>Dataframe with an additional column containing cleaned and typo corrected item entries.</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Text descriptions of food items are cleaned using a built-in dictionary of common typos and corrections for each phrase. Phrases are then matched using a dictionary of known n-gram item names. The resulting item(s) are provided as a list.</p>
+<div id="cell-39" class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>clean_loggings(<span class="st">'data/output/public.json'</span>).head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">unique_code</th>
+<th data-quarto-table-cell-role="th">desc_text</th>
+<th data-quarto-table-cell-role="th">cleaned</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>alqt14018795225</td>
+<td>Water</td>
+<td>[water]</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>alqt14018795225</td>
+<td>Coffee White</td>
+<td>[coffee, white]</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>alqt14018795225</td>
+<td>Salad</td>
+<td>[salad]</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L991" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="get_types" class="level3">
+<h3 class="anchored" data-anchor-id="get_types">get_types</h3>
+<blockquote class="blockquote">
+<pre><code> get_types (data_source:Union[str,pandas.core.frame.DataFrame],
+            food_type:Union[str,list])</code></pre>
+</blockquote>
+<p>Filters logs for only logs of specified type(s).</p>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 38%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. Folder paths<br>with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is. A column ‘food_type’ is required to be within the data.</td>
+</tr>
+<tr class="even">
+<td>food_type</td>
+<td>str | list</td>
+<td>A single food type, or list of food types. Valid types are ‘f’: food, ‘b’: beverage, ‘w’: water,<br>and ‘m’: medication.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+<td><strong>Dataframe filtered for only logs of specific type(s). </strong></td>
+</tr>
+</tbody>
+</table>
+<p>Type selection accepts multiple types at once as a list of entry types. All types chosen must be valid.</p>
+<p>Available food types include:</p>
+<ol type="1">
+<li><p>‘f’: Food</p></li>
+<li><p>‘b’: Beverage</p></li>
+<li><p>‘w’: Water</p></li>
+<li><p>‘m’: Medication</p></li>
+</ol>
+<p>Flavored water beverages such as La Croix are counted as ‘water’ and not as ‘beverage’.</p>
+<div id="cell-42" class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>get_types(<span class="st">'data/output/baseline.json'</span>,[<span class="st">'w'</span>, <span class="st">'f'</span>])[[<span class="st">'unique_code'</span>,<span class="st">'desc_text'</span>,<span class="st">'food_type'</span>]].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">unique_code</th>
+<th data-quarto-table-cell-role="th">desc_text</th>
+<th data-quarto-table-cell-role="th">food_type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>alqt14018795225</td>
+<td>Water</td>
+<td>w</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>alqt14018795225</td>
+<td>Salad</td>
+<td>f</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>alqt78896444285</td>
+<td>Water</td>
+<td>w</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>Filtering for a single type is also possible.</p>
+<div id="cell-44" class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>get_types(df, <span class="st">'m'</span>)[[<span class="st">'unique_code'</span>,<span class="st">'desc_text'</span>,<span class="st">'food_type'</span>]].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">unique_code</th>
+<th data-quarto-table-cell-role="th">desc_text</th>
+<th data-quarto-table-cell-role="th">food_type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">323</td>
+<td>alqt14018795225</td>
+<td>Caffeine</td>
+<td>m</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">361</td>
+<td>alqt14018795225</td>
+<td>Caffeine</td>
+<td>m</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">420</td>
+<td>alqt14018795225</td>
+<td>Caffeine</td>
+<td>m</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1028" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="count_caloric_entries" class="level3">
+<h3 class="anchored" data-anchor-id="count_caloric_entries">count_caloric_entries</h3>
+<blockquote class="blockquote">
+<pre><code> count_caloric_entries (df:pandas.core.frame.DataFrame)</code></pre>
+</blockquote>
+<p>Counts the number of food (‘f’) and beverage (‘b’) loggings.</p>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 38%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td>Dataframe of food logging data.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>int</strong></td>
+<td><strong>Number of caloric (food or beverage) entries found.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-46" class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>count_caloric_entries(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>4603</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1052" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="mean_daily_eating_duration" class="level3">
+<h3 class="anchored" data-anchor-id="mean_daily_eating_duration">mean_daily_eating_duration</h3>
+<blockquote class="blockquote">
+<pre><code> mean_daily_eating_duration (df:pandas.core.frame.DataFrame,
+                             date_col:int=6, time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates mean daily eating window by taking the average of each day’s eating window. An eating window is defined as the duration of time between first and last caloric (food or beverage) intake. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data. A column for ‘food_type’ must exist within the data.</td>
+</tr>
+<tr class="even">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>float</strong></td>
+<td></td>
+<td><strong>Float representation of average daily eating window duration.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-48" class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>mean_daily_eating_duration(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>14.038679245283017</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1092" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="std_daily_eating_duration" class="level3">
+<h3 class="anchored" data-anchor-id="std_daily_eating_duration">std_daily_eating_duration</h3>
+<blockquote class="blockquote">
+<pre><code> std_daily_eating_duration (df:pandas.core.frame.DataFrame,
+                            date_col:int=6, time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates the standard deviation of the daily eating window. An eating window is defined as the duration of time between first and last caloric (food or beverage) intake. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data. A column for ‘food_type’ must exist within the data.</td>
+</tr>
+<tr class="even">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>float</strong></td>
+<td></td>
+<td><strong>Float representation of the standard deviation of daily eating window duration.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-50" class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>std_daily_eating_duration(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>7.018679942775867</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1133" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="earliest_entry" class="level3">
+<h3 class="anchored" data-anchor-id="earliest_entry">earliest_entry</h3>
+<blockquote class="blockquote">
+<pre><code> earliest_entry (df:pandas.core.frame.DataFrame, time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates the earliest recorded caloric (food or beverage) entry. It is recommended that you use find_float_time to generate necessary the time column for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data. A column for ‘food_type’ must exist within the data.</td>
+</tr>
+<tr class="even">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>float</strong></td>
+<td></td>
+<td><strong>Float representation of the earliest logtime on any date.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-52" class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>earliest_entry(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>4.0</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1161" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="mean_first_cal" class="level3">
+<h3 class="anchored" data-anchor-id="mean_first_cal">mean_first_cal</h3>
+<blockquote class="blockquote">
+<pre><code> mean_first_cal (df:pandas.core.frame.DataFrame, date_col:int=6,
+                 time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates the average time of first caloric intake. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data. A column for ‘food_type’ must exist within the data.</td>
+</tr>
+<tr class="even">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>float</strong></td>
+<td></td>
+<td><strong>Float representation of average first caloric entry time. </strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-54" class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>mean_first_cal(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>9.22680817610063</code></pre>
+</div>
+</div>
+<div id="cell-55" class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find the average mean first cal time for each participant</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>df.groupby([<span class="st">'unique_code'</span>]).agg(mean_first_cal, date_col <span class="op">=</span> <span class="dv">6</span>, time_col <span class="op">=</span> <span class="dv">7</span>).iloc[:,<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>unique_code
+alqt1148284857      7.315278
+alqt14018795225     7.635938
+alqt16675467779     6.153904
+alqt21525720972    13.211957
+alqt45631586569    15.056295
+alqt5833085442     12.551515
+alqt62359040167     7.252137
+alqt6695047873      7.573077
+alqt78896444285     6.347510
+alqt8668165687      9.702555
+Name: ID, dtype: float64</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1199" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="std_first_cal" class="level3">
+<h3 class="anchored" data-anchor-id="std_first_cal">std_first_cal</h3>
+<blockquote class="blockquote">
+<pre><code> std_first_cal (df:pandas.core.frame.DataFrame, date_col:int=6,
+                time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates the standard deviation for time of first caloric intake. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data. A column for ‘food_type’ must exist within the data.</td>
+</tr>
+<tr class="even">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>float</strong></td>
+<td></td>
+<td><strong>Float representation of the standard deviation of first caloric entry time. </strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-57" class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>std_first_cal(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>4.591417471559444</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1236" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="mean_last_cal" class="level3">
+<h3 class="anchored" data-anchor-id="mean_last_cal">mean_last_cal</h3>
+<blockquote class="blockquote">
+<pre><code> mean_last_cal (df:pandas.core.frame.DataFrame, date_col:int=6,
+                time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates the average time of last caloric intake. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data. A column for ‘food_type’ must exist within the data.</td>
+</tr>
+<tr class="even">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>float</strong></td>
+<td></td>
+<td><strong>Float representation of average last caloric entry time.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-59" class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>mean_last_cal(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>23.265487421383646</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1273" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="std_last_cal" class="level3">
+<h3 class="anchored" data-anchor-id="std_last_cal">std_last_cal</h3>
+<blockquote class="blockquote">
+<pre><code> std_last_cal (df:pandas.core.frame.DataFrame, date_col:int=6,
+               time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates the standard deviation for time of last caloric intake. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data. A column for ‘food_type’ must exist within the data.</td>
+</tr>
+<tr class="even">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>float</strong></td>
+<td></td>
+<td><strong>Float representation of the standard deviation of last caloric entry time. </strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-61" class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>std_last_cal(df, <span class="st">'date'</span>, <span class="st">'float_time'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>4.359435007580498</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1310" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="mean_daily_eating_occasions" class="level3">
+<h3 class="anchored" data-anchor-id="mean_daily_eating_occasions">mean_daily_eating_occasions</h3>
+<blockquote class="blockquote">
+<pre><code> mean_daily_eating_occasions (df:pandas.core.frame.DataFrame,
+                              date_col:int=6, time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates the average number of daily eating occasions. An eating occasion is a single caloric (food or beverage) log. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data. A column for ‘food_type’ must exist within the data.</td>
+</tr>
+<tr class="even">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>int</strong></td>
+<td></td>
+<td><strong>Average number of daily eating occasions. </strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-63" class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>mean_daily_eating_occasions(df, <span class="st">'date'</span>, <span class="st">'float_time'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>6.8915094339622645</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1348" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="std_daily_eating_occasions" class="level3">
+<h3 class="anchored" data-anchor-id="std_daily_eating_occasions">std_daily_eating_occasions</h3>
+<blockquote class="blockquote">
+<pre><code> std_daily_eating_occasions (df:pandas.core.frame.DataFrame,
+                             date_col:int=6, time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates the standard deviation of the number of daily eating occasions. An eating occasion is a single caloric (food or beverage) log. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data. A column for ‘food_type’ must exist within the data.</td>
+</tr>
+<tr class="even">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>int</strong></td>
+<td></td>
+<td><strong>Standard deviation of the number of daily eating occasions. </strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-65" class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>std_daily_eating_occasions(df, <span class="st">'date'</span>, <span class="st">'float_time'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>4.44839423402741</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1386" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="mean_daily_eating_midpoint" class="level3">
+<h3 class="anchored" data-anchor-id="mean_daily_eating_midpoint">mean_daily_eating_midpoint</h3>
+<blockquote class="blockquote">
+<pre><code> mean_daily_eating_midpoint (df:pandas.core.frame.DataFrame,
+                             date_col:int=6, time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates the average daily midpoint eating occasion time. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data. A column for ‘food_type’ must exist within the data.</td>
+</tr>
+<tr class="even">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>int</strong></td>
+<td></td>
+<td><strong>Float representation of the average daily midpoint eating occasion time. </strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-67" class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>mean_daily_eating_midpoint(df, <span class="st">'date'</span>, <span class="st">'float_time'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>16.536425576519914</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1424" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="std_daily_eating_midpoint" class="level3">
+<h3 class="anchored" data-anchor-id="std_daily_eating_midpoint">std_daily_eating_midpoint</h3>
+<blockquote class="blockquote">
+<pre><code> std_daily_eating_midpoint (df:pandas.core.frame.DataFrame,
+                            date_col:int=6, time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates the standard deviation of the daily midpoint eating occasion time. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data. A column for ‘food_type’ must exist within the data.</td>
+</tr>
+<tr class="even">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>int</strong></td>
+<td></td>
+<td><strong>Float representation of the standard deviation of the daily midpoint eating occasion time. </strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-69" class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>std_daily_eating_midpoint(df, <span class="st">'date'</span>, <span class="st">'float_time'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>4.107072970435106</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1462" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="logging_day_counts" class="level3">
+<h3 class="anchored" data-anchor-id="logging_day_counts">logging_day_counts</h3>
+<blockquote class="blockquote">
+<pre><code> logging_day_counts (df:pandas.core.frame.DataFrame)</code></pre>
+</blockquote>
+<p>Calculates the number of days that contain any logs. It is recommended that you use find_date to generate the necessary date column for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 38%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td>Dataframe of food logging data. A column for ‘date’ must exist within the data.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>int</strong></td>
+<td><strong>Number of days with at least one log on that day.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-71" class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>logging_day_counts(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>636</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1482" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="find_missing_logging_days" class="level3">
+<h3 class="anchored" data-anchor-id="find_missing_logging_days">find_missing_logging_days</h3>
+<blockquote class="blockquote">
+<pre><code> find_missing_logging_days (df:pandas.core.frame.DataFrame,
+                            start_date:datetime.date='not_defined',
+                            end_date:datetime.date='not_defined')</code></pre>
+</blockquote>
+<p>Finds days that have no log entries between a start (inclusive) and end date (inclusive). It is recommended that you use find_date to generate the necessary date column for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data.</td>
+</tr>
+<tr class="even">
+<td>start_date</td>
+<td>datetime.date</td>
+<td>not_defined</td>
+<td>Starting date for missing day evaluation. By default the earliest date in the data will be used.</td>
+</tr>
+<tr class="odd">
+<td>end_date</td>
+<td>datetime.date</td>
+<td>not_defined</td>
+<td>Ending date for missing day evaluation. By default the latest date in the data will be used.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>list</strong></td>
+<td></td>
+<td><strong>List of days within the given timeframe that have no log entries.</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The phrase ‘not_defined’ is the intended default value for start and end dates to signify that the earliest and/or latest date within the data should be used. If a participant is missing a valid start or end date, null is returned.</p>
+<div id="cell-74" class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>find_missing_logging_days(df, datetime.date(<span class="dv">2017</span>, <span class="dv">12</span>, <span class="dv">7</span>), datetime.date(<span class="dv">2017</span>, <span class="dv">12</span>, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>[datetime.date(2017, 12, 7),
+ datetime.date(2017, 12, 9),
+ datetime.date(2017, 12, 10)]</code></pre>
+</div>
+</div>
+<div id="cell-75" class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'date'</span>].astype(<span class="bu">str</span>).<span class="bu">str</span>.contains(<span class="st">"2017-12"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ID</th>
+<th data-quarto-table-cell-role="th">unique_code</th>
+<th data-quarto-table-cell-role="th">research_info_id</th>
+<th data-quarto-table-cell-role="th">desc_text</th>
+<th data-quarto-table-cell-role="th">food_type</th>
+<th data-quarto-table-cell-role="th">original_logtime</th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">float_time</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">week_from_start</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>7572733</td>
+<td>alqt14018795225</td>
+<td>150</td>
+<td>Water</td>
+<td>w</td>
+<td>2017-12-08 17:30:00+00:00</td>
+<td>2017-12-08</td>
+<td>17.500000</td>
+<td>17:30:00</td>
+<td>1</td>
+<td>2017</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>411111</td>
+<td>alqt14018795225</td>
+<td>150</td>
+<td>Coffee White</td>
+<td>b</td>
+<td>2017-12-09 00:01:00+00:00</td>
+<td>2017-12-08</td>
+<td>24.016667</td>
+<td>00:01:00</td>
+<td>1</td>
+<td>2017</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>8409118</td>
+<td>alqt14018795225</td>
+<td>150</td>
+<td>Salad</td>
+<td>f</td>
+<td>2017-12-09 00:58:00+00:00</td>
+<td>2017-12-08</td>
+<td>24.966667</td>
+<td>00:58:00</td>
+<td>1</td>
+<td>2017</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1526" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="good_lwa_day_counts" class="level3">
+<h3 class="anchored" data-anchor-id="good_lwa_day_counts">good_lwa_day_counts</h3>
+<blockquote class="blockquote">
+<pre><code> good_lwa_day_counts (df:pandas.core.frame.DataFrame,
+                      window_start:datetime.time,
+                      window_end:datetime.time, min_log_num:int=2,
+                      min_separation:int=5, buffer_time:str='15 minutes',
+                      h:int=4, start_date:datetime.date='not_defined',
+                      end_date:datetime.date='not_defined',
+                      time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates the number of ‘good’ logging days, ‘good’ window days, ‘outside’ window days and adherent days.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data.</td>
+</tr>
+<tr class="even">
+<td>window_start</td>
+<td>datetime.time</td>
+<td></td>
+<td>Starting time for a time restriction window.</td>
+</tr>
+<tr class="odd">
+<td>window_end</td>
+<td>datetime.time</td>
+<td></td>
+<td>Ending time for a time restriction window.</td>
+</tr>
+<tr class="even">
+<td>min_log_num</td>
+<td>int</td>
+<td>2</td>
+<td>Minimum number of logs required for a day to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="odd">
+<td>min_separation</td>
+<td>int</td>
+<td>5</td>
+<td>Minimum number of hours between first and last log on a log day for it to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="even">
+<td>buffer_time</td>
+<td>str</td>
+<td>15 minutes</td>
+<td>pd.Timedelta parsable string, representing ‘wiggle room’ for adherence.</td>
+</tr>
+<tr class="odd">
+<td>h</td>
+<td>int</td>
+<td>4</td>
+<td>Number of hours to shift the definition of ‘date’ by. h = 4 would indicate that a log date begins at<br>4:00 AM and ends the following calendar day at 3:59:59. Float representations of time would therefore<br>go from 4.0 (inclusive) to 28.0 (exclusive) to represent ‘date’ membership for days shifted from their<br>original calendar date.</td>
+</tr>
+<tr class="even">
+<td>start_date</td>
+<td>datetime.date</td>
+<td>not_defined</td>
+<td>Starting date for missing day evaluation. By default the earliest date in the data will be used.</td>
+</tr>
+<tr class="odd">
+<td>end_date</td>
+<td>datetime.date</td>
+<td>not_defined</td>
+<td>Ending date for missing day evaluation. By default the latest date in the data will be used.</td>
+</tr>
+<tr class="even">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>tuple[list, list]</strong></td>
+<td></td>
+<td><strong>List containing number of ‘good’ logging days, ‘good’ window days, ‘outside’ window days, and adherent days.<br>List of three lists. The lists contains dates that are not considered ‘good’ logging days, ‘good’ window days,<br>or adherent days (in that order).</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The main use of this function is to calculate window and logging adherence. These are represented as ‘good’ (valid) logging days, ‘good’ window days, ‘outside’ (invalid) window days, and adherent days.</p>
+<p>The definition of each is:</p>
+<ol type="1">
+<li><p>‘Good’ Logging Day</p>
+<ul>
+<li>A day with at least a specified minimum number of caloric (food or beverage) logs with a minimum specified number of hours between the first and last log for that day.</li>
+</ul></li>
+<li><p>‘Good’ Window Day</p>
+<ul>
+<li>A day where all food loggings are within the participant’s assigned eating restriction window plus any wiggle room, if allowed.</li>
+</ul></li>
+<li><p>Adherent Day</p>
+<ul>
+<li>A day that is both a ‘good’ logging day and a ‘good’ window day.</li>
+</ul></li>
+</ol>
+<div id="cell-78" class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>dates, bad_dates <span class="op">=</span> good_lwa_day_counts(df, datetime.time(<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>), datetime.time(<span class="dv">23</span>,<span class="dv">59</span>,<span class="dv">59</span>))</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>dates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The second product of this function is three lists that outline which days are not compliant with one of the definitions above. The first list (index 0) consists of dates that are not ‘good’ logging days, the second contains days that are not ‘good’ window days. The final list consists of dates that are not adherent (neither ‘good’ window nor ‘good’ logging dates).</p>
+<div id="cell-80" class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>bad_dates[<span class="dv">0</span>][:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="experiment-design" class="level2">
+<h2 class="anchored" data-anchor-id="experiment-design">Experiment Design</h2>
+<p>This group of functions provides methods for filtering participant data.</p>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1648" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="filtering_usable_data" class="level3">
+<h3 class="anchored" data-anchor-id="filtering_usable_data">filtering_usable_data</h3>
+<blockquote class="blockquote">
+<pre><code> filtering_usable_data (df:pandas.core.frame.DataFrame, num_items:int,
+                        num_days:int, identifier:int=1, date_col:int=6)</code></pre>
+</blockquote>
+<p>Filters data for only participants who’s data satisfies the minimum number of days and logs. It is recommended that you use find_date to generate the necessary date column for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data. A column ‘desc_text’, typically found in mCC data<br>is required.</td>
+</tr>
+<tr class="even">
+<td>num_items</td>
+<td>int</td>
+<td></td>
+<td>Minimum number of logs required to pass filter criteria.</td>
+</tr>
+<tr class="odd">
+<td>num_days</td>
+<td>int</td>
+<td></td>
+<td>Minimum number of unique logging days required to pass filter criteria.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column (with indexing starting from 0).</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>tuple[pd.DataFrame, set]</strong></td>
+<td></td>
+<td><strong>Data filtered to only include data from participants that have passed filtering criteria.<br>Set of participants that passed filtering criteria.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-83" class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> file_loader(<span class="st">'data/output/public.json'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-84" class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>filtering_usable_data(df, num_items <span class="op">=</span> <span class="dv">1000</span>, num_days <span class="op">=</span> <span class="dv">14</span>)[<span class="dv">0</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1709" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="prepare_baseline_and_intervention_usable_data" class="level3">
+<h3 class="anchored" data-anchor-id="prepare_baseline_and_intervention_usable_data">prepare_baseline_and_intervention_usable_data</h3>
+<blockquote class="blockquote">
+<pre><code> prepare_baseline_and_intervention_usable_data
+                                                (data_source:Union[str,pan
+                                                das.core.frame.DataFrame],
+                                                baseline_num_items:int,
+                                                baseline_num_days:int, int
+                                                ervention_num_items:int,
+                                                intervention_num_days:int,
+                                                identifier:int=1,
+                                                date_col:int=6)</code></pre>
+</blockquote>
+<p>Filters data for ‘usable’ data within baseline and last two weeks of intervention (weeks 13 and 14). It is recommended that you use the function ‘week_from_start’ to generate the necessary week column for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is.</td>
+</tr>
+<tr class="even">
+<td>baseline_num_items</td>
+<td>int</td>
+<td></td>
+<td>Number of logs for a participant’s baseline data to pass filter criteria.</td>
+</tr>
+<tr class="odd">
+<td>baseline_num_days</td>
+<td>int</td>
+<td></td>
+<td>Number of unique logging days for a participant’s baseline data to pass filter criteria.</td>
+</tr>
+<tr class="even">
+<td>intervention_num_items</td>
+<td>int</td>
+<td></td>
+<td>Number of logs for a participant’s intervention data to pass filter criteria.</td>
+</tr>
+<tr class="odd">
+<td>intervention_num_days</td>
+<td>int</td>
+<td></td>
+<td>Number of unique logging days for a participant’s intervention data to pass filter criteria.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column (with indexing starting from 0).</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>list</strong></td>
+<td></td>
+<td><strong>List of two dataframes: usable baseline data, usable intervention data.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-86" class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span> prepare_baseline_and_intervention_usable_data(<span class="st">'data/output/public.json'</span>, <span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">40</span>, <span class="dv">12</span>)[<span class="dv">0</span>]</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-87" class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="analysis-and-data-summaries" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-and-data-summaries">Analysis and Data Summaries</h2>
+<p>Data analysis and summary functions, including summary functions for specific statistics.</p>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1769" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="users_sorted_by_logging" class="level3">
+<h3 class="anchored" data-anchor-id="users_sorted_by_logging">users_sorted_by_logging</h3>
+<blockquote class="blockquote">
+<pre><code> users_sorted_by_logging
+                          (data_source:Union[str,pandas.core.frame.DataFra
+                          me], food_type:list=['f', 'b', 'm', 'w'],
+                          min_log_num:int=2, min_separation:int=4,
+                          identifier:int=1, date_col:int=6,
+                          time_col:int=7)</code></pre>
+</blockquote>
+<p>Reports the number of ‘good’ logging days for each user, in descending order based on number of ‘good’ logging days.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is.</td>
+</tr>
+<tr class="even">
+<td>food_type</td>
+<td>list</td>
+<td>[‘f’, ‘b’, ‘m’, ‘w’]</td>
+<td>A single food type, or list of food types. Valid types are ‘f’: food, ‘b’: beverage,<br>‘w’: water, and ‘m’: medication.</td>
+</tr>
+<tr class="odd">
+<td>min_log_num</td>
+<td>int</td>
+<td>2</td>
+<td>Minimum number of logs required for a day to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="even">
+<td>min_separation</td>
+<td>int</td>
+<td>4</td>
+<td>Minimum number of hours between first and last log on a log day for it to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="odd">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column (with indexing starting from 0).</td>
+</tr>
+<tr class="even">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+<td></td>
+<td><strong>Dataframe containing the number of good logging days for each user. </strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-90" class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>users_sorted_by_logging(<span class="st">'data/output/public.json'</span>, [<span class="st">'f'</span>,<span class="st">'b'</span>]).head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1825" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="eating_intervals_percentile" class="level3">
+<h3 class="anchored" data-anchor-id="eating_intervals_percentile">eating_intervals_percentile</h3>
+<blockquote class="blockquote">
+<pre><code> eating_intervals_percentile
+                              (data_source:Union[str,pandas.core.frame.Dat
+                              aFrame], identifier:int=1, time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates the 2.5, 5, 10, 12.5, 25, 50, 75, 87.5, 90, 95, and 97.5 percentile eating time for each participant. It also calculates the middle 95, 90, 80, 75, and 50 percentile eating windows for each participant. It is recommended that you use find_float_time to generate necessary the time column for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column (with indexing starting from 0).</td>
+</tr>
+<tr class="odd">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+<td></td>
+<td><strong>Dataframe with count, mean, std, min, quantiles and mid XX%tile eating window durations for all participants.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-92" class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>eating_intervals_percentile(df).iloc[:<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1875" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="first_cal_analysis_summary" class="level3">
+<h3 class="anchored" data-anchor-id="first_cal_analysis_summary">first_cal_analysis_summary</h3>
+<blockquote class="blockquote">
+<pre><code> first_cal_analysis_summary
+                             (data_source:Union[str,pandas.core.frame.Data
+                             Frame], min_log_num:int=2,
+                             min_separation:int=4, identifier:int=1,
+                             date_col:int=6, time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates the 5, 10, 25 , 50, 75, 90, 95 percentile of first caloric entry time for each participant on ‘good’ logging days. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is.</td>
+</tr>
+<tr class="even">
+<td>min_log_num</td>
+<td>int</td>
+<td>2</td>
+<td>Minimum number of logs required for a day to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="odd">
+<td>min_separation</td>
+<td>int</td>
+<td>4</td>
+<td>Minimum number of hours between first and last log on a log day for it to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column (with indexing starting from 0).</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="even">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+<td></td>
+<td><strong>Dataframe with 5, 10, 25, 50, 75, 90, 95 percentile of first caloric entry time for all participants.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-94" class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>first_cal_analysis_summary(<span class="st">'data/output/baseline.json'</span>).head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L1943" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="last_cal_analysis_summary" class="level3">
+<h3 class="anchored" data-anchor-id="last_cal_analysis_summary">last_cal_analysis_summary</h3>
+<blockquote class="blockquote">
+<pre><code> last_cal_analysis_summary
+                            (data_source:Union[str,pandas.core.frame.DataF
+                            rame], min_log_num:int=2,
+                            min_separation:int=4, identifier:int=1,
+                            date_col:int=6, time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates the 5, 10, 25 , 50, 75, 90, 95 percentile of last caloric entry time for each participant on ‘good’ logging days. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is.</td>
+</tr>
+<tr class="even">
+<td>min_log_num</td>
+<td>int</td>
+<td>2</td>
+<td>Minimum number of logs required for a day to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="odd">
+<td>min_separation</td>
+<td>int</td>
+<td>4</td>
+<td>Minimum number of hours between first and last log on a log day for it to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column (with indexing starting from 0).</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="even">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+<td></td>
+<td><strong>Dataframe with 5, 10, 25, 50, 75, 90, 95 percentile of last caloric entry time for all participants.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-96" class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>last_cal_analysis_summary(<span class="st">'data/output/baseline.json'</span>).head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L2015" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="summarize_data" class="level3">
+<h3 class="anchored" data-anchor-id="summarize_data">summarize_data</h3>
+<blockquote class="blockquote">
+<pre><code> summarize_data (data_source:Union[str,pandas.core.frame.DataFrame],
+                 min_log_num:int=2, min_separation:int=4,
+                 identifier:int=1, date_col:int=6, time_col:int=7)</code></pre>
+</blockquote>
+<p>Summarizes participant data, including number of days, total number of logs, number of food/beverage logs, number of medication logs, number of water logs, eating window duration information, first and last caloric log information, and adherence.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is. Must have a column for ‘food_type’ within the data.</td>
+</tr>
+<tr class="even">
+<td>min_log_num</td>
+<td>int</td>
+<td>2</td>
+<td>Minimum number of logs required for a day to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="odd">
+<td>min_separation</td>
+<td>int</td>
+<td>4</td>
+<td>Minimum number of hours between first and last log on a log day for it to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column (with indexing starting from 0).</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="even">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+<td></td>
+<td><strong>Summary dataframe.</strong></td>
+</tr>
+</tbody>
+</table>
+<p>This function provides summary data for an entire study, without separating for study phases. Summaries include statistics for first and last caloric log, eating window, and relevant calculations for middle 95 percentile eating window.</p>
+<div id="cell-99" class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_food_data(<span class="st">'data/test_food_details.csv'</span>, h <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>summarize_data(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L2135" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="summarize_data_with_experiment_phases" class="level3">
+<h3 class="anchored" data-anchor-id="summarize_data_with_experiment_phases">summarize_data_with_experiment_phases</h3>
+<blockquote class="blockquote">
+<pre><code> summarize_data_with_experiment_phases
+                                        (food_data:pandas.core.frame.DataF
+                                        rame, ref_tbl:pandas.core.frame.Da
+                                        taFrame, min_log_num:int=2,
+                                        min_separation:int=5,
+                                        buffer_time:str='15 minutes',
+                                        h:int=4, report_level:int=2,
+                                        txt:bool=False)</code></pre>
+</blockquote>
+<p>Summarizes participant data for each experiment phase and eating window assignment. Summary includes number of days, total number of logs, number of food/beverage logs, number of medication logs, number of water logs, eating window duration information, first and last caloric log information, and adherence.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>food_data</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Dataframe of food logging data. A column for “original_logtime” must exist within the data. mCC output style<br>data is expected.</td>
+</tr>
+<tr class="even">
+<td>ref_tbl</td>
+<td>pd.DataFrame</td>
+<td></td>
+<td>Participant data reference table. See the accompanying HOWTO document for required column positions and<br>formatting.</td>
+</tr>
+<tr class="odd">
+<td>min_log_num</td>
+<td>int</td>
+<td>2</td>
+<td>Minimum number of logs required for a day to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="even">
+<td>min_separation</td>
+<td>int</td>
+<td>5</td>
+<td>Minimum number of hours between first and last log on a log day for it to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="odd">
+<td>buffer_time</td>
+<td>str</td>
+<td>15 minutes</td>
+<td>pd.Timedelta parsable string, representing ‘wiggle room’ for adherence.</td>
+</tr>
+<tr class="even">
+<td>h</td>
+<td>int</td>
+<td>4</td>
+<td>Number of hours to shift the definition of ‘date’ by. h = 4 would indicate that a log date begins at<br>4:00 AM and ends the following calendar day at 3:59:59. Float representations of time would therefore<br>go from 4.0 (inclusive) to 28.0 (exclusive) to represent ‘date’ membership for days shifted from their<br>original calendar date.</td>
+</tr>
+<tr class="odd">
+<td>report_level</td>
+<td>int</td>
+<td>2</td>
+<td>Additional printed info detail level. 0 = No Report. 1 = Report ‘No Logging Days’. <br>2 = Report ‘No Logging Days’, ‘Bad Logging Days’, ‘Bad Window Days’, and ‘Non-Adherent Days’.</td>
+</tr>
+<tr class="even">
+<td>txt</td>
+<td>bool</td>
+<td>False</td>
+<td>If True, a text format (.txt) report will be saved in the current directory, with the name<br>‘treets_warning_dates.txt’</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+<td></td>
+<td><strong>Summary dataframe, where each row represents the summary for a participant during a particular<br>study phase. Participants can have multiple rows for a single study phase if, during that study phase,<br>their assigned eating window is altered.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-101" class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> summarize_data_with_experiment_phases(pd.read_csv(<span class="st">'data/col_test_data/toy_data_2000.csv'</span>)<span class="op">\</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>                      , pd.read_excel(<span class="st">'data/col_test_data/toy_data_17May2021.xlsx'</span>), report_level <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>df.T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="plots" class="level2">
+<h2 class="anchored" data-anchor-id="plots">Plots</h2>
+<p>Plotting functions.</p>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L2380" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="first_cal_mean_with_error_bar" class="level3">
+<h3 class="anchored" data-anchor-id="first_cal_mean_with_error_bar">first_cal_mean_with_error_bar</h3>
+<blockquote class="blockquote">
+<pre><code> first_cal_mean_with_error_bar
+                                (data_source:Union[str,pandas.core.frame.D
+                                ataFrame], min_log_num:int=2,
+                                min_separation:int=4, identifier:int=1,
+                                date_col:int=6, time_col:int=7)</code></pre>
+</blockquote>
+<p>Represents mean and standard deviation of first caloric intake time for each participant as a scatter plot, with participants as the x-axis and time as the y-axis. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is. Must have a column for ‘food_type’ within the data.</td>
+</tr>
+<tr class="even">
+<td>min_log_num</td>
+<td>int</td>
+<td>2</td>
+<td>Minimum number of logs required for a day to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="odd">
+<td>min_separation</td>
+<td>int</td>
+<td>4</td>
+<td>Minimum number of hours between first and last log on a log day for it to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column.</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="even">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>matplotlib.figure.Figure</strong></td>
+<td></td>
+<td><strong>Matplotlib figure object.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-104" class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>first_cal_mean_fig <span class="op">=</span> first_cal_mean_with_error_bar(<span class="st">'data/output/baseline.json'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L2461" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="last_cal_mean_with_error_bar" class="level3">
+<h3 class="anchored" data-anchor-id="last_cal_mean_with_error_bar">last_cal_mean_with_error_bar</h3>
+<blockquote class="blockquote">
+<pre><code> last_cal_mean_with_error_bar
+                               (data_source:Union[str,pandas.core.frame.Da
+                               taFrame], min_log_num:int=2,
+                               min_separation:int=4, identifier:int=1,
+                               date_col:int=6, time_col:int=7)</code></pre>
+</blockquote>
+<p>Represents mean and standard deviation of last caloric intake time for each participant as a scatter plot, with the x-axis as participants and the y-axis as time. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is. Must have a column for ‘food_type’ within the data.</td>
+</tr>
+<tr class="even">
+<td>min_log_num</td>
+<td>int</td>
+<td>2</td>
+<td>Minimum number of logs required for a day to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="odd">
+<td>min_separation</td>
+<td>int</td>
+<td>4</td>
+<td>Minimum number of hours between first and last log on a log day for it to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column.</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="even">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>matplotlib.figure.Figure</strong></td>
+<td></td>
+<td><strong>Matplotlib figure object.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-106" class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>last_cal_mean_fig <span class="op">=</span> last_cal_mean_with_error_bar(<span class="st">'data/output/baseline.json'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L2545" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="first_cal_analysis_variability_plot" class="level3">
+<h3 class="anchored" data-anchor-id="first_cal_analysis_variability_plot">first_cal_analysis_variability_plot</h3>
+<blockquote class="blockquote">
+<pre><code> first_cal_analysis_variability_plot
+                                      (data_source:Union[str,pandas.core.f
+                                      rame.DataFrame], min_log_num:int=2,
+                                      min_separation:int=4,
+                                      identifier:int=1, date_col:int=6,
+                                      time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates first caloric log time variability for ‘good’ logging days by subtracting 5, 10, 25, 50, 75, 90, 95 percentile of first caloric intake time from the 50th percentile first caloric intake time. It also produces a histogram that represents the 90%-10% interval for all participants. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is. Must have a column for ‘food_type’ within the data.</td>
+</tr>
+<tr class="even">
+<td>min_log_num</td>
+<td>int</td>
+<td>2</td>
+<td>Minimum number of logs required for a day to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="odd">
+<td>min_separation</td>
+<td>int</td>
+<td>4</td>
+<td>Minimum number of hours between first and last log on a log day for it to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column.</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="even">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>matplotlib.figure.Figure</strong></td>
+<td></td>
+<td><strong>Matplotlib figure object. </strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-108" class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>first_cal_var_plot <span class="op">=</span> first_cal_analysis_variability_plot(<span class="st">'data/output/baseline.json'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L2626" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="last_cal_analysis_variability_plot" class="level3">
+<h3 class="anchored" data-anchor-id="last_cal_analysis_variability_plot">last_cal_analysis_variability_plot</h3>
+<blockquote class="blockquote">
+<pre><code> last_cal_analysis_variability_plot
+                                     (data_source:Union[str,pandas.core.fr
+                                     ame.DataFrame], min_log_num:int=2,
+                                     min_separation:int=4,
+                                     identifier:int=1, date_col:int=6,
+                                     time_col:int=7)</code></pre>
+</blockquote>
+<p>Calculates last caloric log time variability for ‘good’ logging days by subtracting 5, 10, 25, 50, 75, 90, 95 percentile of last caloric intake time from the 50th percentile last caloric intake time. It also produces a histogram that represents the 90%-10% interval for all participants. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is. Must have a column for ‘food_type’ within the data.</td>
+</tr>
+<tr class="even">
+<td>min_log_num</td>
+<td>int</td>
+<td>2</td>
+<td>Minimum number of logs required for a day to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="odd">
+<td>min_separation</td>
+<td>int</td>
+<td>4</td>
+<td>Minimum number of hours between first and last log on a log day for it to be considered a ‘good’ logging day.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column.</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="even">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>matplotlib.figure.Figure</strong></td>
+<td></td>
+<td><strong>Matplotlib figure object. </strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-110" class="cell">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>last_cal_var_plot <span class="op">=</span> last_cal_analysis_variability_plot(<span class="st">'data/output/baseline.json'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L2708" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="first_cal_avg_histplot" class="level3">
+<h3 class="anchored" data-anchor-id="first_cal_avg_histplot">first_cal_avg_histplot</h3>
+<blockquote class="blockquote">
+<pre><code> first_cal_avg_histplot
+                         (data_source:Union[str,pandas.core.frame.DataFram
+                         e], identifier:int=1, date_col:int=6,
+                         time_col:int=7)</code></pre>
+</blockquote>
+<p>Plots a histogram of average first caloric intake for all participants. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is. Must have a column for ‘food_type’ within the data.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column.</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="even">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>matplotlib.figure.Figure</strong></td>
+<td></td>
+<td><strong>Matplotlib figure object. </strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-112" class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>first_cal_avg_plot <span class="op">=</span> first_cal_avg_histplot(<span class="st">'data/output/baseline.json'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L2762" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="first_cal_sample_distplot" class="level3">
+<h3 class="anchored" data-anchor-id="first_cal_sample_distplot">first_cal_sample_distplot</h3>
+<blockquote class="blockquote">
+<pre><code> first_cal_sample_distplot
+                            (data_source:Union[str,pandas.core.frame.DataF
+                            rame], n:int, replace:bool=False,
+                            identifier:int=1, date_col:int=6,
+                            time_col:int=7)</code></pre>
+</blockquote>
+<p>Creates a distplot for the first caloric intake time for a random selection of ‘n’ number of participants. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is. Must have a column for ‘food_type’ within the data.</td>
+</tr>
+<tr class="even">
+<td>n</td>
+<td>int</td>
+<td></td>
+<td>Number of participants to plot for, selected randomly without replacement.</td>
+</tr>
+<tr class="odd">
+<td>replace</td>
+<td>bool</td>
+<td>False</td>
+<td>If true, samples with replacement. Samples without replacement by default.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column.</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="even">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>matplotlib.figure.Figure</strong></td>
+<td></td>
+<td><strong>Matplotlib figure object. </strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-114" class="cell">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>first_cal_distplot <span class="op">=</span> first_cal_sample_distplot(<span class="st">'data/output/intervention.json'</span>, n <span class="op">=</span> <span class="dv">5</span>, replace <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L2825" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="last_cal_avg_histplot" class="level3">
+<h3 class="anchored" data-anchor-id="last_cal_avg_histplot">last_cal_avg_histplot</h3>
+<blockquote class="blockquote">
+<pre><code> last_cal_avg_histplot
+                        (data_source:Union[str,pandas.core.frame.DataFrame
+                        ], identifier:int=1, date_col:int=6,
+                        time_col:int=7)</code></pre>
+</blockquote>
+<p>Plots a histogram of average last caloric intake for all participants. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is. Must have a column for ‘food_type’ within the data.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column.</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="even">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>matplotlib.figure.Figure</strong></td>
+<td></td>
+<td><strong>Matplotlib figure object. </strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-116" class="cell">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>last_cal_avg_hist <span class="op">=</span> last_cal_avg_histplot(<span class="st">'data/output/baseline.json'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L2879" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="last_cal_sample_distplot" class="level3">
+<h3 class="anchored" data-anchor-id="last_cal_sample_distplot">last_cal_sample_distplot</h3>
+<blockquote class="blockquote">
+<pre><code> last_cal_sample_distplot
+                           (data_source:Union[str,pandas.core.frame.DataFr
+                           ame], n:int, replace:bool=False,
+                           identifier:int=1, date_col:int=6,
+                           time_col:int=7)</code></pre>
+</blockquote>
+<p>Creates a distplot for the last caloric intake time for a random selection of ‘n’ number of participants. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is. Must have a column for ‘food_type’ within the data.</td>
+</tr>
+<tr class="even">
+<td>n</td>
+<td>int</td>
+<td></td>
+<td>Number of participants to plot for, selected randomly without replacement.</td>
+</tr>
+<tr class="odd">
+<td>replace</td>
+<td>bool</td>
+<td>False</td>
+<td>If true, samples with replacement. Samples without replacement by default.</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column.</td>
+</tr>
+<tr class="odd">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="even">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>matplotlib.figure.Figure</strong></td>
+<td></td>
+<td><strong>Matplotlib figure object. </strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-118" class="cell">
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>last_cal_distplot <span class="op">=</span> last_cal_sample_distplot(<span class="st">'data/output/intervention.json'</span>, n <span class="op">=</span> <span class="dv">5</span>, replace<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/FleischerResearchLab/treets/blob/master/treets/core.py#L2943" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="swarmplot" class="level3">
+<h3 class="anchored" data-anchor-id="swarmplot">swarmplot</h3>
+<blockquote class="blockquote">
+<pre><code> swarmplot (data_source:Union[str,pandas.core.frame.DataFrame],
+            max_loggings:int, identifier:int=1, date_col:int=6,
+            time_col:int=7)</code></pre>
+</blockquote>
+<p>Creates a swarmplot for participants logging data. It is recommended that you use find_date and find_float_time to generate necessary date and time columns for this function.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>data_source</td>
+<td>str | pd.DataFrame</td>
+<td></td>
+<td>String file or folder path. Single .json or .csv paths create a pd.DataFrame. <br>Folder paths with files matching the input pattern are read together into a single pd.DataFrame. Existing<br>dataframes are read as is. Must have a column for ‘food_type’ within the data.</td>
+</tr>
+<tr class="even">
+<td>max_loggings</td>
+<td>int</td>
+<td></td>
+<td>Maximum number of randomly selected logs to be plotted for each participant.</td>
+</tr>
+<tr class="odd">
+<td>identifier</td>
+<td>int</td>
+<td>1</td>
+<td>Column number for an existing unique identifier column in provided data source. Data exported from mCC typically<br>has a unique identifier as its 1st column.</td>
+</tr>
+<tr class="even">
+<td>date_col</td>
+<td>int</td>
+<td>6</td>
+<td>Column number for an existing date column in provided data source.</td>
+</tr>
+<tr class="odd">
+<td>time_col</td>
+<td>int</td>
+<td>7</td>
+<td>Column number for an existing time column in provided data source.</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>matplotlib.figure.Figure</strong></td>
+<td></td>
+<td><strong>Matplotlib figure object.</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-120" class="cell">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>swarm <span class="op">=</span> swarmplot(<span class="st">'data/output/public.json'</span>, max_loggings <span class="op">=</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/FleischerResearchLab\.github\.io\/treets\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/FleischerResearchLab/treets/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
